@@ -9,7 +9,7 @@ export async function loader({ request }: LoaderArgs) {
     
     if (session.has("userId")) return redirect("/");
     return json({});
-};
+}
   
 
 export default function Login() {
