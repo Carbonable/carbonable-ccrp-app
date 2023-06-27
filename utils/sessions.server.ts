@@ -4,7 +4,7 @@ import { createDatabaseSessionStorage } from "./dbsessions.server";
 const sessionCookie = createCookie("__session", {
     httpOnly: true,
     path: "/",
-    secrets: process.env.SESSIONS_SECRETS,
+    secrets: process.env.SESSIONS_SECRETS !== undefined ? [process.env.SESSIONS_SECRETS] : [""],
     sameSite: "lax",
     secure: true
 });

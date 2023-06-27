@@ -23,7 +23,7 @@ export async function sendMagikLink({request, email}: {request: Request, email: 
     }
     
     // Send the email
-    let magikLink = new URL(request.headers.get("origin") || "");
+    const magikLink = new URL(request.headers.get("origin") || "");
     magikLink.pathname = "/login/verify";
     magikLink.searchParams.set("hash", hash);
 

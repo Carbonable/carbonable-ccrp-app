@@ -24,7 +24,7 @@ export async function loader({ request }: LoaderArgs) {
   }
   
   return json({});
-};
+}
 
 export default function Index() {
   return (
