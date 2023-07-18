@@ -27,5 +27,3 @@ model Session {
   createdAt DateTime @default(now())
   data      String
 }
-
- 
