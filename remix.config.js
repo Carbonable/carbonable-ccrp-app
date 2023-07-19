@@ -1,6 +1,7 @@
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
   ignoredRouteFiles: ["**/.*"],
+  erverDependenciesToBundle: ["@apollo/client"],
   tailwind: true,
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",
@@ -12,6 +13,5 @@ module.exports = {
     v2_meta: true,
     v2_normalizeFormMethod: true,
     v2_routeConvention: true,
-  },
-  serverModuleFormat: "esm",
+  }
 };
