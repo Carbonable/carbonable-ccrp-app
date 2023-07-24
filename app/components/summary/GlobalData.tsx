@@ -13,7 +13,7 @@ function GlobalKPI({title, kpi, loading, error, refetchData}: {title: string, kp
     if (error) return (
         <div className="relative w-full border border-neutral-700 bg-allocation-card bg-blend-overlay bg-cover p-4 xl:p-8 rounded-xl">
             <div className="text-neutral-300 text-sm font-light">{title}</div>
-            <div className="text-neutral-100 text-xl font-bold mt-2 bg-opacityLight-5 border border-neutral-600 rounded-xl px-4 py-2 cursor-pointer hover:brightness-105">
+            <div className="text-neutral-100 text-xl font-bold mt-2 bg-opacityLight-5 border border-neutral-600 rounded-xl px-4 py-2 cursor-pointer hover:brightness-105" onClick={refetchData}>
                 Reload
             </div>
         </div>
@@ -41,7 +41,7 @@ export default function GlobalData() {
     }
 
     const globalData: GlobalData = data?.getGlobalData;
-    console.log(data);
+
     return (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
             <GlobalKPI title="Invested amount" kpi={globalData?.total_invested} loading={loading} error={error} refetchData={refetchData} />
