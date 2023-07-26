@@ -1,14 +1,14 @@
 import { useQuery } from "@apollo/client";
-import { useState } from "react";
 import type { PaginationObject, ProjectFundingAllocation } from "~/graphql/__generated__/graphql";
 import Pagination from "../common/Pagination";
 import { GET_PROJECT_FUNDING_ALLOCATION } from "~/graphql/queries";
 import { getNumericPercentage } from "~/utils/utils";
 import SquaredInitials from "../common/SquaredInitials";
+import ErrorReload from "../common/ErrorReload";
 
 export default function ProjectFundingAllocation() {
-    const [currentPage] = useState(1);
-    const [resultsPerPage] = useState(5);
+    const currentPage = 1;
+    const resultsPerPage = 5;
     const { loading, error, data, refetch } = useQuery(GET_PROJECT_FUNDING_ALLOCATION, {
         variables: {
             pagination: {
@@ -38,8 +38,6 @@ export default function ProjectFundingAllocation() {
         });
     }
 
-    console.log(loading, error, data)
-    
     return (
         <div className="mt-12 w-full">
             <div className="mt-4 w-full font-inter text-sm overflow-x-scroll">
@@ -58,7 +56,7 @@ export default function ProjectFundingAllocation() {
                     <tbody>
                         {loading && <ProjectFundingAllocationLoading resultsPerPage={resultsPerPage} />}
                         {!loading && !error && <ProjectFundingAllocationLoaded projectFundingAllocation={projectFundingAllocation} />}
-                        {error && <ProjectFundingAllocationError refetchData={refetchData} /> }
+                        {error && <ErrorReload refetchData={refetchData} /> }
                     </tbody>
                 </table>
             </div>
@@ -116,15 +114,6 @@ function ProjectFundingAllocationLoaded({projectFundingAllocation}: {projectFund
         </>
     )
 }
-
-function ProjectFundingAllocationError({refetchData}: {refetchData?: () => void}) {
-    return (
-        <div className="text-neutral-100 text-xl font-bold m-2 bg-opacityLight-5 border border-neutral-600 rounded-xl px-4 py-2 cursor-pointer hover:brightness-105" onClick={refetchData}>
-            Reload
-        </div>
-    )
-}
-
 
 function AllocationBar({percentage}: {percentage: string}) {
     const percentageInt = getNumericPercentage(percentage);

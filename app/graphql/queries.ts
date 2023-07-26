@@ -50,3 +50,68 @@ export const GET_PROJECT_FUNDING_ALLOCATION = gql`
     }
   }
 `;
+
+export const GET_PROJECTS_METRICS = gql`
+  query GetProjectsMetrics {
+    getProjectMetrics {
+      colors {
+        blue {
+          key
+          value
+        }
+        green {
+          key
+          value
+        }
+        orange {
+          key
+          value
+        }
+      }
+      localization {
+        value
+        country {
+          flag
+          iso
+          name
+        }
+      }
+      standards {
+        key
+        value
+      }
+      types {
+        avoidance
+        removal
+      }
+    }
+  }
+`;
+
+export const GET_PROJECTS_IMPACT = gql`
+  query GetImpactMetrics {
+    getImpactMetrics {
+      protected_forest
+      protected_species
+      removed_tons
+      sdgs {
+        name
+        number
+      }
+    }
+  }
+`;
+
+export const GET_PROJECTED_DECARBONATION = gql`
+  query GetProjectedDecarbonation($viewType: ProjectedDecarbonationViewType) {
+    getProjectedDecarbonation(viewType: $viewType) {
+      data {
+        key
+        value
+      }
+      emissions
+      target
+      year
+    }
+  }
+`;
