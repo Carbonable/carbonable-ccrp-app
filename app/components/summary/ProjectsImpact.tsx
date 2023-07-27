@@ -42,7 +42,7 @@ export default function ProjectsImpact() {
                 <div className="mt-8 grid grid-cols-5 gap-6 md:grid-cols-3">
                     {metrics.sdgs.map((sdg: Sdg, idx: number) => {
                         return (
-                            <a href={`https://sdgs.un.org/fr/goals/goal${sdg.number}`} key={`sdg_image_${sdg.number}`} target="_blank" rel="noreferrer" >
+                            <a href={`https://sdgs.un.org/goals/goal${sdg.number}`} key={`sdg_image_${sdg.number}`} target="_blank" rel="noreferrer" >
                                 <img key={`sdg_${idx}`} className="rounded-lg" alt={`sdg_${sdg.number}`} src={`https://sdgs.un.org/sites/default/files/goals/E_SDG_Icons-${sdg.number < 10 ? '0' + sdg.number: sdg.number}.jpg`} />
                             </a>
                         )
