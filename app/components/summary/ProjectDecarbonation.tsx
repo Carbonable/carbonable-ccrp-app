@@ -3,7 +3,7 @@ import { GET_PROJECTED_DECARBONATION } from "~/graphql/queries";
 import ErrorReload from "../common/ErrorReload";
 import { ProjectedDecarbonationViewType, type ProjectedDecarbonationGraph } from "~/graphql/__generated__/graphql";
 import { Bar, CartesianGrid, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomLegend } from "../common/CustomGraphLegend";
 
 export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: boolean }) {
@@ -12,7 +12,7 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
             viewType: ProjectedDecarbonationViewType.OffsetType
         }
     });
-
+    
     const [bar1Name, setBar1Name] = useState('Ex Post');
     const [bar2Name, setBar2Name] = useState('Ex Ante');
 
@@ -43,8 +43,64 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
         refetch();
     }
 
+    const handleChange = (event: any) => {
+        const value = event.target.value;
+        switch (value) {
+            case ProjectedDecarbonationViewType.OffsetType:
+                setBar1Name('Ex Post');
+                setBar2Name('Ex Ante');
+                break;
+            case ProjectedDecarbonationViewType.InvestmentType:
+                setBar1Name('Forward Finance');
+                setBar2Name('Direct Purchase');
+                break;
+            case ProjectedDecarbonationViewType.ProjectType:
+                setBar1Name('REDD+');
+                setBar2Name('ARR');
+                break;
+        }
+        refetch({
+            viewType: value
+        });
+    }
+
+    useEffect(() => {
+        setLegendPayload([
+            {
+                name: "Emissions",
+                color: "#334566",
+            },
+            {
+                name: bar1Name,
+                color: "#046B4D",
+            },
+            {
+                name: bar2Name,
+                color: "#06A475",
+            },
+            {
+                name: "Target",
+                color: "#D0D1D6",
+            }
+        ]);
+    }, [bar1Name, bar2Name]);
+
+    const options = [
+        {
+            key: ProjectedDecarbonationViewType.OffsetType,
+            value: 'Offset type'
+        },
+        {
+            key: ProjectedDecarbonationViewType.InvestmentType,
+            value: 'Investment type'
+        },
+        {
+            key: ProjectedDecarbonationViewType.ProjectType,
+            value: 'Project type'
+        }
+    ];
+
     const projectedDecarbonation: ProjectedDecarbonationGraph[] = data?.getProjectedDecarbonation;
-    console.log(projectedDecarbonation);
 
     if (loading) {
         return (
@@ -77,6 +133,25 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
     };
     return (
         <div className={`w-full px-0 mt-8 h-full`}>
+            <div className="w-fit mt-2 mb-12 ml-2">
+                <div className="text-neutral-300 font-inter font-medium ml-1 text-sm">View type:</div>
+                <div className="relative w-full border border-neutral-500 bg-opacityLight-10 rounded-lg pl-4 pr-2 py-1 mt-1 focus:border-neutral-300">
+                    <select 
+                        id="viewType" 
+                        className="text-neutral-100 outline-0 w-full bg-transparent cursor-pointer" 
+                        style={{ WebkitPaddingEnd: '20px'}} 
+                        name="viewType" 
+                        placeholder="Offset type"
+                        onChange={handleChange}
+                    >
+                        {options.map((option: {key: ProjectedDecarbonationViewType, value: string}, index: number) => {
+                            return (
+                                <option key={index} value={option.key}>{option.value}</option>
+                            )
+                        })}
+                    </select>
+                </div>
+            </div>
             <ResponsiveContainer width="100%" height="100%" aspect={2.2}>
                 <ComposedChart
                     width={300}
