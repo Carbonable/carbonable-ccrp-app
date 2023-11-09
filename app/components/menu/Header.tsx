@@ -1,4 +1,4 @@
-export default function Menu() {
+export default function Header() {
     
     return (
         <div className="w-full md:w-11/12 mx-auto sticky top-0 z-10">

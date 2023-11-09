@@ -9,7 +9,7 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import styles from "~/styles/app.css";
-import Menu from "./components/Menu";
+import Header from "./components/menu/Header";
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from "@apollo/client";
 
 export const links: LinksFunction = () => [
@@ -42,10 +42,17 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-neutral-800 text-neutral-100 relative w-screen mx-auto 2xl:max-w-6xl">
+      <body className="bg-neutral-800 text-neutral-100">
         <ApolloProvider client={graphQLClient}>
-          <Menu />
-          <Outlet />
+          <header className="fixed top-0 w-full z-50">
+            <Header />
+          </header>
+          <menu className="fixed bottom-0 w-full z-50">
+            Menu
+          </menu>
+          <main className="px-4 py-8 md:px-8 mt-[80px] relative w-screen mx-auto 2xl:max-w-6xl font-inter">
+            <Outlet />
+          </main>
           <ScrollRestoration />
           <Scripts />
           <LiveReload />

@@ -2,11 +2,11 @@ import { useQuery } from "@apollo/client";
 import { GET_PROJECTED_DECARBONATION } from "~/graphql/queries";
 import ErrorReload from "../common/ErrorReload";
 import { ProjectedDecarbonationViewType, type ProjectedDecarbonationGraph } from "~/graphql/__generated__/graphql";
-import { Bar, CartesianGrid, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useEffect, useState } from "react";
 import { CustomLegend } from "../common/CustomGraphLegend";
 
-export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: boolean }) {
+export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: boolean }) {
     const { loading, error, data, refetch } = useQuery(GET_PROJECTED_DECARBONATION, {
         variables: {
             viewType: ProjectedDecarbonationViewType.OffsetType
@@ -175,7 +175,14 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
                     <Tooltip content={<CustomTooltip />} />
                     {!isFullScreen && <Legend /> }
                     <Bar dataKey="emissions" name="Emission" yAxisId="left" barSize={10} fill="#334566" radius={[10, 10, 0, 0]} />
-                    <Bar dataKey="data[1].value" name={bar1Name} yAxisId="left" stackId="a" barSize={10} fill="#046B4D" />
+                    <Bar dataKey="data[1].value" name={bar1Name} yAxisId="left" stackId="a" barSize={10} fill="#046B4D">
+                        {projectedDecarbonation.map((entry: any, index: number) => {
+                            return (
+                                // @ts-ignore
+                                <Cell key={`cell-${index}`} radius={entry.data[0].value === 0 ? [10, 10, 0, 0] : undefined} />
+                            );
+                        })}
+                    </Bar>
                     <Bar dataKey="data[0].value" name={bar2Name} yAxisId="left" stackId="a" barSize={10} fill="#06A475" radius={[10, 10, 0, 0]} />
                     <Line type="monotone" name="Target" yAxisId="right" dataKey="target" stroke="#D0D1D6" strokeWidth={2} dot={false} activeDot={false} />
                 </ComposedChart>

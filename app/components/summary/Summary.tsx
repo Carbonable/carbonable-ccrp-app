@@ -11,7 +11,7 @@ export default function Summary() {
         <div className="relative w-full md:px-4">
             <GlobalData />
             <div className="relative">
-                <Title title="PROJECTED DECARBONATION" />
+                <Title title="Net Zero Planning" />
                 <ProjectDecarbonation isFullScreen={true} />
                 <ProjectDecarbonationTable />
             </div>
