@@ -1,6 +1,7 @@
 import { json, redirect, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
 import { getSession } from "utils/sessions.server";
-import Summary from "~/components/summary/Summary";
+import { Tab } from '@headlessui/react'
+import NetZeroOverview from "~/components/dashboard/NetZeroOverview";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -32,8 +33,21 @@ export async function loader({ request }: LoaderArgs) {
 export default function Index() {
 
   return (
-    <div className="mx-auto md:mt-12 lg:mt-6 max-w-7xl p-2 pb-16">
-      <Summary />
+    <div className="">
+      <Tab.Group>
+        <Tab.List>
+          <Tab>Net Zero Overview</Tab>
+          <Tab>Business Units Allocation</Tab>
+          <Tab>Project Allocation</Tab>
+          <Tab>Reporting</Tab>
+        </Tab.List>
+        <Tab.Panels>
+          <Tab.Panel><NetZeroOverview /></Tab.Panel>
+          <Tab.Panel>Content 2</Tab.Panel>
+          <Tab.Panel>Content 3</Tab.Panel>
+          <Tab.Panel>Content 4</Tab.Panel>
+        </Tab.Panels>
+    </Tab.Group>
     </div>
   );
 }
