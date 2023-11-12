@@ -8,7 +8,7 @@ import ProjectsMetrics from "./ProjectsMetrics";
 
 export default function Summary() {
     return (
-        <div className="relative w-full md:px-4">
+        <div className="relative w-full">
             <GlobalData />
             <div className="relative">
                 <Title title="Net Zero Planning" />

@@ -9,8 +9,10 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 import styles from "~/styles/app.css";
-import Header from "./components/menu/Header";
 import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from "@apollo/client";
+import Menu from "./components/menu/Menu";
+import { useState } from "react";
+import Header from "./components/menu/Header";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: styles },
@@ -34,6 +36,8 @@ export default function App() {
     cache: new InMemoryCache(),
   });
 
+  const [openMenu, setOpenMenu] = useState(false);
+
   return (
     <html lang="en">
       <head>
@@ -42,15 +46,11 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="bg-neutral-800 text-neutral-100">
+      <body className="bg-neutral-800 text-neutral-100 font-inter">
         <ApolloProvider client={graphQLClient}>
-          <header className="fixed top-0 w-full z-50">
-            <Header />
-          </header>
-          <menu className="fixed bottom-0 w-full z-50">
-            Menu
-          </menu>
-          <main className="px-4 py-8 md:px-8 mt-[80px] relative w-screen mx-auto 2xl:max-w-6xl font-inter">
+          <Header openMenu={openMenu} setOpenMenu={setOpenMenu} />
+          <Menu openMenu={openMenu} setOpenMenu={setOpenMenu} />
+          <main className="p-8 ml-0 mt-[66px] lg:mt-0 lg:pl-[200px] lg:mx-auto max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
             <Outlet />
           </main>
           <ScrollRestoration />
