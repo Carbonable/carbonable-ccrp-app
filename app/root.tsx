@@ -50,7 +50,7 @@ export default function App() {
         <ApolloProvider client={graphQLClient}>
           <Header openMenu={openMenu} setOpenMenu={setOpenMenu} />
           <Menu openMenu={openMenu} setOpenMenu={setOpenMenu} />
-          <main className="p-8 ml-0 mt-[66px] lg:mt-0 lg:pl-[200px] lg:mx-auto max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
+          <main className="p-4 ml-0 mt-[66px] lg:p-8 lg:mt-0 lg:pl-[222px] lg:mx-auto max-w-full lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl">
             <Outlet />
           </main>
           <ScrollRestoration />

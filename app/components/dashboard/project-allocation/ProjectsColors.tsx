@@ -1,7 +1,7 @@
 import type { ProjectColorRepartition } from "~/graphql/__generated__/graphql";
-import { SmallTitle } from "../common/Title";
+import { SmallTitle } from "../../common/Title";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
-import { CustomLegend } from "../common/CustomGraphLegend";
+import { CustomLegend } from "../../common/CustomGraphLegend";
 import { getNumericPercentage } from "~/utils/utils";
 
 export default function ProjectsColors({ colors }: { colors: ProjectColorRepartition }) {
@@ -26,11 +26,12 @@ export default function ProjectsColors({ colors }: { colors: ProjectColorReparti
 
     const newColors = { ...colors };
     delete newColors.__typename;
+    const filteredNewColors = Object.assign(newColors);
     // Convert the colors object into an array
     const transformedColors = Object.keys(newColors).map((colorName: string) => (
         {
             name: colorName,
-            value: getNumericPercentage(newColors[colorName].value),
+            value: getNumericPercentage(filteredNewColors[colorName].value),
             color: legendPayload.filter((legend) => legend.type === colorName)[0].color,
         }
     

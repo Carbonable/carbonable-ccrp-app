@@ -1,10 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { GET_PROJECTED_DECARBONATION } from "~/graphql/queries";
-import ErrorReload from "../common/ErrorReload";
+import ErrorReload from "../../common/ErrorReload";
 import { ProjectedDecarbonationViewType, type ProjectedDecarbonationGraph } from "~/graphql/__generated__/graphql";
 import { Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useEffect, useState } from "react";
-import { CustomLegend } from "../common/CustomGraphLegend";
+import { CustomLegend } from "../../common/CustomGraphLegend";
+import Title from "~/components/common/Title";
 
 export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: boolean }) {
     const { loading, error, data, refetch } = useQuery(GET_PROJECTED_DECARBONATION, {
@@ -133,6 +134,7 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
     };
     return (
         <div className={`w-full px-0 mt-8 h-full`}>
+            <Title title="Net Zero planning" />
             <div className="w-fit mt-2 mb-12 ml-2">
                 <div className="text-neutral-300 font-inter font-medium ml-1 text-sm">View type:</div>
                 <div className="relative w-full border border-neutral-500 bg-opacityLight-10 rounded-lg pl-4 pr-2 py-1 mt-1 focus:border-neutral-300">

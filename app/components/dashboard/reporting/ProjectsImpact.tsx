@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client";
 import type { ImpactMetrics, Sdg } from "~/graphql/__generated__/graphql";
 import { GET_PROJECTS_IMPACT } from "~/graphql/queries";
-import ErrorReload from "../common/ErrorReload";
-import { ImpactTitle } from "../common/Title";
-import { LinkSecondary } from "../common/Buttons";
+import ErrorReload from "../../common/ErrorReload";
+import { ImpactTitle } from "../../common/Title";
+import { LinkSecondary } from "../../common/Buttons";
 
 export default function ProjectsImpact() {
     const { loading, error, data, refetch } = useQuery(GET_PROJECTS_IMPACT);

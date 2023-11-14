@@ -4,7 +4,7 @@ import { GET_PROJECTS_METRICS } from "~/graphql/queries";
 import ProjectsColors from "./ProjectsColors";
 import ProjectsTypes from "./ProjectsTypes";
 import ProjectsStandards from "./ProjectsStandards";
-import ErrorReload from "../common/ErrorReload";
+import ErrorReload from "../../common/ErrorReload";
 import ProjectsCountries from "./ProjectsCountries";
 
 export default function ProjectsMetrics() {

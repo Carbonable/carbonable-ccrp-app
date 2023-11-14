@@ -19,7 +19,7 @@ export default function SquaredInitials({ text, color }: { text: string, color: 
 
     return (
         <div
-            className="w-10 h-10 flex items-center justify-center text-neutral-50 font-bold text-xl rounded-lg"  style={{backgroundColor: backgroundColor}}
+            className="w-10 h-10 flex items-center justify-center text-neutral-50 font-bold text-lg rounded-lg"  style={{backgroundColor: backgroundColor}}
             >
             {getInitials(cleanText)}
         </div>

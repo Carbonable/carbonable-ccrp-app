@@ -1,10 +1,10 @@
 import Title from "../common/Title";
-import GlobalData from "./GlobalData";
-import ProjectDecarbonation from "./ProjectDecarbonation";
-import ProjectDecarbonationTable from "./ProjectDecarbonationTable";
-import ProjectFundingAllocation from "./ProjectFundingAllocation";
-import ProjectsImpact from "./ProjectsImpact";
-import ProjectsMetrics from "./ProjectsMetrics";
+import GlobalData from "./net-zero/GlobalData";
+import ProjectDecarbonation from "./net-zero/ProjectDecarbonation";
+import ProjectDecarbonationTable from "./net-zero/ProjectDecarbonationTable";
+import ProjectFundingAllocation from "./project-allocation/ProjectFundingAllocation";
+import ProjectsImpact from "./reporting/ProjectsImpact";
+import ProjectsMetrics from "./project-allocation/ProjectsMetrics";
 
 export default function Summary() {
     return (
