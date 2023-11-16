@@ -62,6 +62,7 @@ export interface SanityContent {
     dueDiligence: string;
     projectOverview: SanitySections,
     imagesGallery: any[],
+    videosGallery: any[],
     reports: Report[],
     certifier: Certifier,
     seo: SEO

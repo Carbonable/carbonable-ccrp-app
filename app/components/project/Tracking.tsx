@@ -45,8 +45,6 @@ export default function Tracking({ mapboxKey, slug, trackingActivated}: { mapbox
         const data = fetcherDmrv.data;
         setDmrv(data);
       }, [fetcherDmrv.data]);
-
-    console.log(dmrv)
     
     useEffect(() => {
         if (dmrv === undefined || dmrv?.hasOwnProperty('indicators') === false) return;

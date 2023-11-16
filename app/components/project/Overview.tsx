@@ -13,7 +13,7 @@ export default function Overview({content}: {content: SanityContent}) {
                 <>
                     <Title title="Images gallery" />
                     <div className="mt-4">
-                        <ImageGallery gallery={content.imagesGallery} />
+                        <ImageGallery images={content.imagesGallery} videos={content.videosGallery} />
                     </div>
                 </>
             }

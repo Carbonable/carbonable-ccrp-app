@@ -38,6 +38,7 @@
     "react-dom": "^18.2.0",
     "react-draggable": "^4.4.6",
     "react-paginate": "^8.2.0",
+    "react-player": "^2.13.0",
     "recharts": "^2.7.2"
   },
   "devDependencies": {
