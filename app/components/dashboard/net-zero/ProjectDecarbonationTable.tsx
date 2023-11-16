@@ -97,8 +97,8 @@ function ProjectedDecarbonationLoaded({projectedDecarbonationTable}: {projectedD
         <>
             {projectedDecarbonationTable.map((projection: ProjectedDecarbonation, idx: number) => {
                 return (
-                    <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:bg-neutral-600 group ${parseInt(projection.year) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
-                        <td className="px-4 sticky left-0 z-10 bg-neutral-800 group-hover:bg-neutral-600">{projection.year}</td>
+                    <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:brightness-110 ${parseInt(projection.year) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
+                        <td className="px-4 sticky left-0 z-10 bg-neutral-800">{projection.year}</td>
                         <td className="px-4">{projection.emissions}</td>
                         <td className="px-4">{projection.received_cc}</td>
                         <td className="px-4">{projection.purchased_cc}</td>

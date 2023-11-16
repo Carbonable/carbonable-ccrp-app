@@ -1,6 +1,11 @@
+import Pagination from "~/components/common/Pagination";
 import Title from "~/components/common/Title";
 
 export default function ProjectDecarbonationTableCumulative() {
+
+    const handlePageClick = (data: any) => {
+        console.log(data);
+    }
     
     return (
         <div className="mt-12 w-full">
@@ -24,7 +29,7 @@ export default function ProjectDecarbonationTableCumulative() {
                 </table>
             </div>
             <div className="mt-8">
-                
+                <Pagination pageCount={1} handlePageClick={handlePageClick} />
             </div>
         </div>
     );
@@ -56,8 +61,8 @@ function ProjectedDecarbonationLoaded({projectedDecarbonationTable}: {projectedD
         <>
             {projectedDecarbonationTable.map((projection: any, idx: number) => {
                 return (
-                    <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:bg-neutral-600 group ${parseInt(projection.year) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
-                        <td className="px-4 sticky left-0 z-10 bg-neutral-800 group-hover:bg-neutral-600">TBD</td>
+                    <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:brightness-110 ${parseInt(projection.year) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
+                        <td className="px-4 sticky left-0 z-10 bg-neutral-800">TBD</td>
                         <td className="px-4">TBD</td>
                         <td className="px-4">TBD</td>
                         <td className="px-4">TBD</td>

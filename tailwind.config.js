@@ -12,6 +12,7 @@ module.exports = {
       colors: {
         white: '#EBECF0',
         black: '#030305',
+        green: "#0AF2AD",
         neutral: {
           100: '#D0D1D6',
           200: '#A8ABB3',
@@ -66,6 +67,9 @@ module.exports = {
       },
       backgroundImage: {
         'green-blue': 'linear-gradient(270deg, #A8C4EF 39.58%, #0AF2AD 100%);',
+        'planification': "linear-gradient(50.39deg, rgba(11, 13, 19, 0.5) 15.27%, rgba(19, 21, 28, 0.5) 46.91%, rgba(31, 33, 40, 0.5) 91.42%), url('/assets/images/backgrounds/bg-planification.png');",
+        'menu-selected': "linear-gradient(rgba(10, 247, 177, 0.05), rgba(9, 173, 124, 0.05), rgba(8, 112, 81, 0.05));",
+        'beta-button': "linear-gradient(180deg, rgba(11, 255, 138, 0.4) 0%, rgba(113, 170, 255, 0.4) 100%);"
       }
     }
   },
