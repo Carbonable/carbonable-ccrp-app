@@ -1,7 +1,6 @@
 import * as Tabs from '@radix-ui/react-tabs';
 import NetZeroOverview from './NetZeroOverview';
 import BusinessUnitAllocation from './BusinessUnitsAllocation';
-import ProjectAllocation from './ProjectAllocation';
 import Reporting from './Reporting';
 
 export default function DashboardTabs() {
@@ -10,16 +9,14 @@ export default function DashboardTabs() {
     return (
         <Tabs.Root defaultValue="netzero" className='flex flex-col w-full'>
             <Tabs.List className="shrink-0">
-                <div className='w-full flex overflow-x-scroll sticky top-20 lg:top-[-6px] z-50'>
+                <div className='w-full md:w-fit flex overflow-x-scroll'>
                     <Tabs.Trigger value="netzero" className={triggerClassName}>Net Zero Overview</Tabs.Trigger>
                     <Tabs.Trigger value="businessunit" className={triggerClassName}>Business Units Allocation</Tabs.Trigger>
-                    <Tabs.Trigger value="projectallocation" className={triggerClassName}>Projects Allocation</Tabs.Trigger>
                     <Tabs.Trigger value="reporting" className={triggerClassName}>Reporting</Tabs.Trigger>
                 </div>
                 <div className='w-full'>
                     <Tabs.Content value="netzero" className={contentClassName}><NetZeroOverview /></Tabs.Content>
                     <Tabs.Content value="businessunit" className={contentClassName}><BusinessUnitAllocation /></Tabs.Content>
-                    <Tabs.Content value="projectallocation" className={contentClassName}><ProjectAllocation /></Tabs.Content>
                     <Tabs.Content value="reporting" className={contentClassName}><Reporting /></Tabs.Content>
                 </div>
             </Tabs.List>

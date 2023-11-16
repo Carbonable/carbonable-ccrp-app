@@ -1,7 +1,7 @@
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
   ignoredRouteFiles: ["**/.*"],
-  serverDependenciesToBundle: ["@apollo/client"],
+  serverDependenciesToBundle: ["@apollo/client", "@wry/context" ,"@wry/equality", "@wry/trie", "ts-invariant", "mapbox-gl", "zen-observable-ts"],
   tailwind: true,
   // appDirectory: "app",
   // assetsBuildDirectory: "public/build",

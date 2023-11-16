@@ -4,8 +4,23 @@ interface LinkButtonProps {
     className?: string
 }
 
-const secondaryButton = 'font-inter uppercase rounded-full px-4 py-2 text-sm text-neutal-500 border border-neutral-500 tracking-wide hover:bg-opacityLight-5 md:px-6 md:py-3 ';
+interface ButtonProps {
+    children: React.ReactNode;
+    className?: string;
+    onClick?: () => void;
+    disabled?: boolean;
+}
+
+const secondaryButton = 'font-inter uppercase rounded-lg px-4 py-2 text-sm text-neutal-500 border border-neutral-500 tracking-wide hover:bg-opacityLight-5 ';
 
 export function LinkSecondary({ href, children, className }: LinkButtonProps) {
     return <a href={href} target="_blank" className={secondaryButton + className} rel="noreferrer">{children}</a>;
+}
+
+export default function SecondaryButton({ children, className, onClick }: ButtonProps) {
+    return <button className={secondaryButton + className} onClick={onClick}>{children}</button>;
+}
+
+export function MapButton({ children, className, onClick }: ButtonProps) {
+    return <button className={`font-inter rounded-lg text-neutral-50 py-2 px-4 text-center focus:outline-none border border-neutral-500 bg-opacityDark-70 hover:bg-opacityDark-60 ` + className} onClick={onClick}>{children}</button>;
 }

@@ -1,6 +1,9 @@
-export default function Title({ title }: { title: string }) {   
+export default function Title({ title, isBeta }: { title: string, isBeta?: boolean }) {
     return (
-        <div className="text-neutral-100 text-xl font-bold pb-2 border-b border-neutral-500 mt-20 mb-8">{title}</div>
+        <div className="text-neutral-100 text-xl font-bold pb-2 border-b border-neutral-500 mt-12 mb-8 flex items-center">
+            {title}
+            {isBeta && <span className="px-3 py-1 ml-3 bg-beta-button text-xs rounded-md font-light">Beta version</span>}
+        </div>
     )
 }
 
