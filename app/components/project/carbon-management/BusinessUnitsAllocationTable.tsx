@@ -1,3 +1,5 @@
+import { useState } from "react";
+import AllocationDialog from "~/components/allocation/Dialog";
 import SecondaryButton from "~/components/common/Buttons";
 import Pagination from "~/components/common/Pagination";
 import Title from "~/components/common/Title";
@@ -37,48 +39,38 @@ export default function BusinessUnitsAllocationTable() {
     );
 }
 
-function BusinessUnitsAllocationTableLoading({resultsPerPage}: {resultsPerPage: number}) {
-    const lines = Array.from(Array(resultsPerPage).keys());
-    const colums = [1, 2, 3, 4, 5, 6, 7, 8];
-    return (
-        <>
-            {lines.map((line: number) => {
-                return (
-                    <tr className="border-b border-neutral-600 last:border-b-0" key={`loader_${line}`}>
-                        { colums.map((column: number) => {
-                            return (
-                                <td className="animate-pulse bg-opacityLight-10 h-12 border-4 border-transparent" key={`loader_${line}_${column}`}></td>
-                            )
-                        })}
-                    </tr>
-                )
-            })}
-            
-        </>
-    )
-}
-
 function BusinessUnitsAllocationTableLoaded({businessUnitAllocationTable}: {businessUnitAllocationTable: any[]}) {
-    const allocate = (allocation: any) => () => {
-        console.log(allocation);
-    }
-
     return (
         <>
             {businessUnitAllocationTable.map((allocation: any, idx: number) => {
                 return (
-                    <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:brightness-110 group ${parseInt(allocation.year) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
-                        <td className="px-4 sticky left-0 z-10 bg-neutral-800">TBD</td>
-                        <td className="px-4">TBD</td>
-                        <td className="px-4">TBD</td>
-                        <td className="px-4">TBD</td>
-                        <td className="px-4">TBD</td>
-                        <td className="px-4">TBD</td>
-                        <td className="px-4">TBD</td>
-                        <td className="px-4"><SecondaryButton onClick={allocate(allocation)}>Allocate</SecondaryButton></td>
-                    </tr>
+                    <AllocationTableRow key={`allocation_${idx}`} allocation={allocation} />
                 )
             })}
+        </>
+    )
+}
+
+function AllocationTableRow({allocation}: {allocation: any}) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const allocate = (allocation: any) => () => {
+        setIsOpen(true);
+    }
+
+    return (
+        <>
+            <tr className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:brightness-110 group ${parseInt(allocation.year) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
+                <td className="px-4 sticky left-0 z-10 bg-neutral-800">TBD</td>
+                <td className="px-4">TBD</td>
+                <td className="px-4">TBD</td>
+                <td className="px-4">TBD</td>
+                <td className="px-4">TBD</td>
+                <td className="px-4">TBD</td>
+                <td className="px-4">TBD</td>
+                <td className="px-4"><SecondaryButton onClick={allocate(allocation)}>Allocate</SecondaryButton></td>
+            </tr>
+            <AllocationDialog isOpen={isOpen} setIsOpen={setIsOpen} allocation={allocation} />
         </>
     )
 }

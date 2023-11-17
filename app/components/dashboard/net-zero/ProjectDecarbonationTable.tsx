@@ -4,6 +4,7 @@ import type { PaginationObject, ProjectedDecarbonation } from "~/graphql/__gener
 import { GET_PROJECTED_DECARBONATION_TABLE } from "~/graphql/queries";
 import ErrorReload from "../../common/ErrorReload";
 import Title from "~/components/common/Title";
+import TableLoading from "~/components/table/TableLoading";
 
 export default function ProjectDecarbonationTable() {
     const currentPage = 1;
@@ -58,7 +59,7 @@ export default function ProjectDecarbonationTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        {loading && <ProjectedDecarbonationLoading resultsPerPage={resultsPerPage} />}
+                        {loading && <TableLoading resultsPerPage={resultsPerPage} numberOfColumns={11} />}
                         {!loading && !error && <ProjectedDecarbonationLoaded projectedDecarbonationTable={projectedDecarbonationTable} />}
                         {error && <ErrorReload refetchData={refetchData} /> }
                     </tbody>
@@ -69,27 +70,6 @@ export default function ProjectDecarbonationTable() {
             </div>
         </div>
     );
-}
-
-function ProjectedDecarbonationLoading({resultsPerPage}: {resultsPerPage: number}) {
-    const lines = Array.from(Array(resultsPerPage).keys());
-    const colums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
-    return (
-        <>
-            {lines.map((line: number) => {
-                return (
-                    <tr className="border-b border-neutral-600 last:border-b-0" key={`loader_${line}`}>
-                        { colums.map((column: number) => {
-                            return (
-                                <td className="animate-pulse bg-opacityLight-10 h-12 border-4 border-transparent" key={`loader_${line}_${column}`}></td>
-                            )
-                        })}
-                    </tr>
-                )
-            })}
-            
-        </>
-    )
 }
 
 function ProjectedDecarbonationLoaded({projectedDecarbonationTable}: {projectedDecarbonationTable: ProjectedDecarbonation[]}) {

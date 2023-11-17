@@ -5,6 +5,7 @@ import { GET_PROJECT_FUNDING_ALLOCATION } from "~/graphql/queries";
 import { getNumericPercentage } from "~/utils/utils";
 import SquaredInitials from "../../common/SquaredInitials";
 import ErrorReload from "../../common/ErrorReload";
+import TableLoading from "~/components/table/TableLoading";
 
 export default function ProjectFundingAllocation() {
     const currentPage = 1;
@@ -61,7 +62,7 @@ export default function ProjectFundingAllocation() {
                         </tr>
                     </thead>
                     <tbody>
-                        {loading && <ProjectFundingAllocationLoading resultsPerPage={resultsPerPage} />}
+                        {loading && <TableLoading resultsPerPage={resultsPerPage} numberOfColumns={13} />}
                         {!loading && !error && <ProjectFundingAllocationLoaded projectFundingAllocation={projectFundingAllocation} />}
                         {error && <ErrorReload refetchData={refetchData} /> }
                     </tbody>
@@ -72,27 +73,6 @@ export default function ProjectFundingAllocation() {
             </div>
         </div>
     );
-}
-
-function ProjectFundingAllocationLoading({resultsPerPage}: {resultsPerPage: number}) {
-    const lines = Array.from(Array(resultsPerPage).keys());
-    const colums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
-    return (
-        <>
-            {lines.map((line: number) => {
-                return (
-                    <tr className="border-b border-neutral-600 last:border-b-0" key={`loader_${line}`}>
-                        { colums.map((column: number) => {
-                            return (
-                                <td className="animate-pulse bg-opacityLight-10 h-12 border-4 border-transparent" key={`loader_${line}_${column}`}></td>
-                            )
-                        })}
-                    </tr>
-                )
-            })}
-            
-        </>
-    )
 }
 
 function ProjectFundingAllocationLoaded({projectFundingAllocation}: {projectFundingAllocation: ProjectFundingAllocation[]}) {
