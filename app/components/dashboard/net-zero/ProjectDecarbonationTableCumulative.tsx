@@ -35,27 +35,6 @@ export default function ProjectDecarbonationTableCumulative() {
     );
 }
 
-function ProjectedDecarbonationLoading({resultsPerPage}: {resultsPerPage: number}) {
-    const lines = Array.from(Array(resultsPerPage).keys());
-    const colums = [1, 2, 3, 4, 5, 6, 7];
-    return (
-        <>
-            {lines.map((line: number) => {
-                return (
-                    <tr className="border-b border-neutral-600 last:border-b-0" key={`loader_${line}`}>
-                        { colums.map((column: number) => {
-                            return (
-                                <td className="animate-pulse bg-opacityLight-10 h-12 border-4 border-transparent" key={`loader_${line}_${column}`}></td>
-                            )
-                        })}
-                    </tr>
-                )
-            })}
-            
-        </>
-    )
-}
-
 function ProjectedDecarbonationLoaded({projectedDecarbonationTable}: {projectedDecarbonationTable: any[]}) {
     return (
         <>

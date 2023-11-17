@@ -24,3 +24,7 @@ export default function SecondaryButton({ children, className, onClick }: Button
 export function MapButton({ children, className, onClick }: ButtonProps) {
     return <button className={`font-inter rounded-lg text-neutral-50 py-2 px-4 text-center focus:outline-none border border-neutral-500 bg-opacityDark-70 hover:bg-opacityDark-60 ` + className} onClick={onClick}>{children}</button>;
 }
+
+export function GreenButton({ children, className, onClick, disabled }: ButtonProps) {
+    return <button disabled={disabled} className={secondaryButton + className} onClick={onClick}>{children}</button>;
+}
