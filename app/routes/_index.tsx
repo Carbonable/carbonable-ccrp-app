@@ -1,6 +1,7 @@
 import { json, redirect, type LoaderArgs, type V2_MetaFunction } from "@remix-run/node";
 import { getSession } from "utils/sessions.server";
 import DashboardTabs from "~/components/dashboard/DashboardTabs";
+import DefaultLayout from "~/layouts/DefaultLayout";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -32,8 +33,10 @@ export async function loader({ request }: LoaderArgs) {
 export default function Index() {
 
   return (
-    <div className="mt-8">
-      <DashboardTabs />
-    </div>
+    <DefaultLayout>
+      <div className="mt-8">
+        <DashboardTabs />
+      </div>
+    </DefaultLayout>
   );
 }

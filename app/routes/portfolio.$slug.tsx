@@ -1,7 +1,8 @@
 import { json, type LoaderArgs } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react"
-import BackButton from "~/components/common/BackButton";
+import ProjectHeader from "~/components/project/ProjectHeader";
 import ProjectTabs from "~/components/project/ProjectTabs";
+import DefaultLayout from "~/layouts/DefaultLayout";
 import { client } from "~/utils/sanity/client";
 
 export async function loader({ params }: LoaderArgs) {
@@ -22,11 +23,12 @@ export default function Index() {
 
     return (
         <>
-            <BackButton />
-            <div className="mt-4">
-                <ProjectTabs mapboxKey={mapboxKey} slug={slug} trackingActivated={trackingActivated} content={content[0]} />
-            </div>
-            
+            <ProjectHeader />
+            <DefaultLayout>
+                <div className="mt-4">
+                    <ProjectTabs mapboxKey={mapboxKey} slug={slug} trackingActivated={trackingActivated} content={content[0]} />
+                </div>
+            </DefaultLayout>
         </>
     )
 }
