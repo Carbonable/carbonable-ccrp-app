@@ -3,7 +3,7 @@ import { urlFor } from "~/utils/sanity/image";
 
 
 export default function ImageGallery({images, videos}: {images: any[], videos: any[]}) {
-    console.log(images, videos);
+
     return (
         <div className="mb-12 grid grid-cols-1 md:grid-cols-3 gap-1">
             {images.map((image, index) => (

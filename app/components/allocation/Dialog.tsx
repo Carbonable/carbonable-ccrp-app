@@ -89,7 +89,7 @@ export default function AllocationDialog({isOpen, setIsOpen, allocation}:
                                         Carbon units will be allocated to this business unit on a fifo basis, based on target and other business units allocations.
                                     </div>
                                     <div className="w-full text-right my-8">
-                                        <GreenButton className={`w-fit ${hasErrror ? "cursor-not-allowed bg-greenish-500/50 text-neutral-300 hover:bg-greenish-500/50" : "bg-greenish-500"}`} onClick={handleAction} disabled={hasErrror}>Allocate</GreenButton>
+                                        <GreenButton className={`w-fit ${hasErrror ? "cursor-not-allowed bg-greenish-500/50 text-neutral-300 hover:bg-greenish-500/50" : ""}`} onClick={handleAction} disabled={hasErrror}>Allocate</GreenButton>
                                     </div>
                                 </div>
                             </div>

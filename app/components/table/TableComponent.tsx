@@ -33,7 +33,7 @@ export default function TableComponent({loading, error, refetchData, resultsPerP
 }
 
 function TableLoaded({tableData}: {tableData: string[][]}) {
-    console.log(tableData)
+
     return (
         <>
             {tableData.map((data: string[], idx: number) => {
