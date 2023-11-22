@@ -31,7 +31,6 @@ export async function loader({ request }: LoaderArgs) {
 }
 
 export default function Index() {
-
   return (
     <DefaultLayout>
       <div className="mt-8">

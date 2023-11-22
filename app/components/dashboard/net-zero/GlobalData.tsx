@@ -22,7 +22,7 @@ export default function GlobalData() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
             <GlobalKPI title="Target (current year)" kpi={`TBD`} loading={loading} error={error} refetchData={refetchData} />
             <GlobalKPI title="Actual (current year)" kpi={`TBD`} loading={loading} error={error} refetchData={refetchData} />
-            <GlobalKPI title="Debt" kpi={`TBD`} loading={loading} error={error} refetchData={refetchData} />
+            <GlobalKPI title="Debt (current year)" kpi={`TBD`} loading={loading} error={error} refetchData={refetchData} />
             <GlobalKPI title="Number of projects" kpi={`TBD`} loading={loading} error={error} refetchData={refetchData} />
         </div>
     );

@@ -55,7 +55,7 @@ export default function ProjectsImpact() {
                     <ImpactTitle title="Removed Tons" value={metrics.removed_tons} />
                 </div>
                 <div className={`col-span-1 ${cssBlock}`}>
-                    <ImpactTitle title="Protected Forest (hectares)" value={metrics.protected_forest} />
+                    <ImpactTitle title="Restaured hectares" value={metrics.protected_forest} />
                 </div>
                 <div className={`col-span-1 ${cssBlock}`}>
                     <ImpactTitle title="Protected Species" value={metrics.protected_species} />
