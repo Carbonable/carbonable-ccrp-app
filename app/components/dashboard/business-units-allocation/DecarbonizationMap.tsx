@@ -21,7 +21,9 @@ export default function DecarbonizationMap() {
             <div className="mt-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-2 mt-4">
                     {blocks.map((block: any, idx: number) => (
-                        <Block key={`block_${idx}`} block={block} />
+                        <a key={`block_${idx}`} href={`/businessunit/${idx}`} className="outline-none">
+                            <Block block={block} />
+                        </a>
                     ))}
                 </div>
             </div>

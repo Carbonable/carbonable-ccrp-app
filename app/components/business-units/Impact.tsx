@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/client";
 import type { ImpactMetrics, Sdg } from "~/graphql/__generated__/graphql";
 import { GET_PROJECTS_IMPACT } from "~/graphql/queries";
 import ErrorReload from "../common/ErrorReload";
+import Title, { ImpactTitle } from "../common/Title";
 import { LinkSecondary } from "../common/Buttons";
-import { ImpactTitle } from "../common/Title";
 
 export default function ProjectImpact() {
     const { loading, error, data, refetch } = useQuery(GET_PROJECTS_IMPACT);
@@ -22,6 +22,7 @@ export default function ProjectImpact() {
     if (loading) {
         return (
             <>
+                <Title title="Project Impact" />
                 <div className="mt-12 w-full">
                     Loading ...
                 </div>
@@ -39,6 +40,7 @@ export default function ProjectImpact() {
 
     return (
         <>
+            <Title title="Project Impact" />
             <div className="mt-12 w-full grid grid-rows-3 md:grid-rows-3 grid-cols-4 grid-flow-col gap-4">
                 <div className={`col-span-4 md:row-span-3 md:col-span-1 ${cssBlock}`}>
                     <ImpactTitle title="Impacted SDGs" value={`# ${metrics.sdgs.length}`} />
