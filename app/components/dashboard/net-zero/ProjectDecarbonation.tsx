@@ -1,21 +1,24 @@
 import { useQuery } from "@apollo/client";
-import { GET_PROJECTED_DECARBONATION } from "~/graphql/queries";
 import ErrorReload from "../../common/ErrorReload";
-import { ProjectedDecarbonationViewType, type ProjectedDecarbonationGraph } from "~/graphql/__generated__/graphql";
+import { type NetZeroPlanning } from "~/graphql/__generated__/graphql";
 import { Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useEffect, useState } from "react";
 import { CustomLegend } from "../../common/CustomGraphLegend";
 import Title from "~/components/common/Title";
+import { NET_ZERO_PLANNING } from "~/graphql/queries/net-zero";
+import { CARBONABLE_COMPANY_ID } from "~/utils/constant";
 
 export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: boolean }) {
-    const { loading, error, data, refetch } = useQuery(GET_PROJECTED_DECARBONATION, {
+    const { loading, error, data, refetch } = useQuery(NET_ZERO_PLANNING, {
         variables: {
-            viewType: ProjectedDecarbonationViewType.OffsetType
+            view: {
+                company_id: CARBONABLE_COMPANY_ID
+            }
         }
     });
     
-    const [bar1Name, setBar1Name] = useState('Ex Post');
-    const [bar2Name, setBar2Name] = useState('Ex Ante');
+    const [bar1Name] = useState('Ex Post');
+    const [bar2Name] = useState('Ex Ante');
 
     const [legendPayload, setLegendPayload] = useState([
         {
@@ -23,11 +26,11 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
             color: "#334566",
         },
         {
-            name: bar1Name,
+            name: 'Ex Post',
             color: "#046B4D",
         },
         {
-            name: bar2Name,
+            name: 'Ex Ante',
             color: "#06A475",
         },
         {
@@ -42,27 +45,6 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
 
     const refetchData = () => {
         refetch();
-    }
-
-    const handleChange = (event: any) => {
-        const value = event.target.value;
-        switch (value) {
-            case ProjectedDecarbonationViewType.OffsetType:
-                setBar1Name('Ex Post');
-                setBar2Name('Ex Ante');
-                break;
-            case ProjectedDecarbonationViewType.InvestmentType:
-                setBar1Name('Forward Finance');
-                setBar2Name('Direct Purchase');
-                break;
-            case ProjectedDecarbonationViewType.ProjectType:
-                setBar1Name('REDD+');
-                setBar2Name('ARR');
-                break;
-        }
-        refetch({
-            viewType: value
-        });
     }
 
     useEffect(() => {
@@ -82,26 +64,15 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
             {
                 name: "Target",
                 color: "#D0D1D6",
+            },
+            {
+                name: "Actual",
+                color: "#877B44",
             }
         ]);
     }, [bar1Name, bar2Name]);
 
-    const options = [
-        {
-            key: ProjectedDecarbonationViewType.OffsetType,
-            value: 'Offset type'
-        },
-        {
-            key: ProjectedDecarbonationViewType.InvestmentType,
-            value: 'Investment type'
-        },
-        {
-            key: ProjectedDecarbonationViewType.ProjectType,
-            value: 'Project type'
-        }
-    ];
-
-    const projectedDecarbonation: ProjectedDecarbonationGraph[] = data?.getProjectedDecarbonation;
+    const netZeroPlanning: NetZeroPlanning[] = data?.netZeroPlanning;
 
     if (loading) {
         return (
@@ -135,30 +106,11 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
     return (
         <div className={`w-full px-0 mt-8 h-full`}>
             <Title title="Net Zero planning" />
-            <div className="w-fit mt-2 mb-12 ml-2">
-                <div className="text-neutral-300 font-inter font-medium ml-1 text-sm">View type:</div>
-                <div className="relative w-full border border-neutral-500 bg-opacityLight-10 rounded-lg pl-4 pr-2 py-1 mt-1 focus:border-neutral-300">
-                    <select 
-                        id="viewType" 
-                        className="text-neutral-100 outline-0 w-full bg-transparent cursor-pointer" 
-                        style={{ WebkitPaddingEnd: '20px'}} 
-                        name="viewType" 
-                        placeholder="Offset type"
-                        onChange={handleChange}
-                    >
-                        {options.map((option: {key: ProjectedDecarbonationViewType, value: string}, index: number) => {
-                            return (
-                                <option key={index} value={option.key}>{option.value}</option>
-                            )
-                        })}
-                    </select>
-                </div>
-            </div>
             <ResponsiveContainer width="100%" height="100%" aspect={2.2}>
                 <ComposedChart
                     width={300}
                     height={300}
-                    data={projectedDecarbonation}
+                    data={netZeroPlanning}
                     margin={{
                         top: 5,
                         right: 30,
@@ -178,7 +130,7 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
                     {!isFullScreen && <Legend /> }
                     <Bar dataKey="emissions" name="Emission" yAxisId="left" barSize={10} fill="#334566" radius={[10, 10, 0, 0]} />
                     <Bar dataKey="data[1].value" name={bar1Name} yAxisId="left" stackId="a" barSize={10} fill="#046B4D">
-                        {projectedDecarbonation.map((entry: any, index: number) => {
+                        {netZeroPlanning.map((entry: any, index: number) => {
                             return (
                                 // @ts-ignore
                                 <Cell key={`cell-${index}`} radius={entry.data[0].value === 0 ? [10, 10, 0, 0] : undefined} />
@@ -187,6 +139,7 @@ export default function ProjectDecarbonation({ isFullScreen}: { isFullScreen: bo
                     </Bar>
                     <Bar dataKey="data[0].value" name={bar2Name} yAxisId="left" stackId="a" barSize={10} fill="#06A475" radius={[10, 10, 0, 0]} />
                     <Line type="monotone" name="Target" yAxisId="right" dataKey="target" stroke="#D0D1D6" strokeWidth={2} dot={false} activeDot={false} />
+                    <Line type="monotone" name="Actual" yAxisId="right" dataKey="actual" stroke="#877B44" strokeWidth={2} dot={false} activeDot={false} />
                 </ComposedChart>
             </ResponsiveContainer>
             <div className="text-neutral-300 text-sm lg:text-lg font-inter text-center w-fit mx-auto md:mt-2 lg:mt-0">

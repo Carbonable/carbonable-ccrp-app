@@ -40,7 +40,7 @@ export function getProjectColor(projectColor: string): string {
  * @param {number} number
  * @returns {string} Shorten value
  */
-export function shortenNumber(number: number | undefined): string {
+export function shortenNumber(number: number | undefined | any ): string {
     if (undefined === number) { return '-'; }
     return Intl.NumberFormat('en-US', {
         notation: "compact",

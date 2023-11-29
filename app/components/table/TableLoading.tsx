@@ -14,7 +14,6 @@ export default function TableLoading({resultsPerPage, numberOfColumns}: {results
                     </tr>
                 )
             })}
-            
         </>
     )
 }

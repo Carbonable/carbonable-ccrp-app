@@ -1,12 +1,12 @@
 import { useQuery } from "@apollo/client";
 import type { ImpactMetrics, Sdg } from "~/graphql/__generated__/graphql";
-import { GET_PROJECTS_IMPACT } from "~/graphql/queries";
 import ErrorReload from "../../common/ErrorReload";
 import { ImpactTitle } from "../../common/Title";
 import { LinkSecondary } from "../../common/Buttons";
+import { GET_IMPACT_METRICS } from "~/graphql/queries/impact";
 
 export default function ProjectsImpact() {
-    const { loading, error, data, refetch } = useQuery(GET_PROJECTS_IMPACT);
+    const { loading, error, data, refetch } = useQuery(GET_IMPACT_METRICS);
     const cssBlock = "border border-neutral-500 rounded-xl px-6 py-4 bg-neutral-700"
 
     if (error) {

@@ -1,19 +1,19 @@
 import { useQuery } from "@apollo/client";
 import Pagination from "../../common/Pagination";
-import type { PaginationObject, ProjectedDecarbonation } from "~/graphql/__generated__/graphql";
-import { GET_PROJECTED_DECARBONATION_TABLE } from "~/graphql/queries";
-import ErrorReload from "../../common/ErrorReload";
+import type { Annual } from "~/graphql/__generated__/graphql";
+import { ErrorReloadTable, NoDataTable } from "../../common/ErrorReload";
 import Title from "~/components/common/Title";
 import TableLoading from "~/components/table/TableLoading";
+import { ANNUAL } from "~/graphql/queries/net-zero";
+import { CARBONABLE_COMPANY_ID } from "~/utils/constant";
 
 export default function ProjectDecarbonationTable() {
     const currentPage = 1;
     const resultsPerPage = 5;
-    const { loading, error, data, refetch } = useQuery(GET_PROJECTED_DECARBONATION_TABLE, {
+    const { loading, error, data, refetch } = useQuery(ANNUAL, {
         variables: {
-            pagination: {
-                page: currentPage,
-                count: resultsPerPage
+            view: {
+                company_id: CARBONABLE_COMPANY_ID
             }
         }
     });
@@ -26,16 +26,10 @@ export default function ProjectDecarbonationTable() {
         refetch();
     }
 
-    const projectedDecarbonationTable: ProjectedDecarbonation[] = data?.getProjectedDecarbonationTable.data;
-    const pagination: PaginationObject = data?.getProjectedDecarbonationTable.pagination;
+    const annual: Annual[] = data?.annual;
 
     const handlePageClick = (data: any) => {
-        refetch({
-            pagination: {
-                page: data.selected + 1,
-                count: resultsPerPage
-            }
-        });
+        refetch();
     }
     
     return (
@@ -60,35 +54,45 @@ export default function ProjectDecarbonationTable() {
                     </thead>
                     <tbody>
                         {loading && <TableLoading resultsPerPage={resultsPerPage} numberOfColumns={11} />}
-                        {!loading && !error && <ProjectedDecarbonationLoaded projectedDecarbonationTable={projectedDecarbonationTable} />}
-                        {error && <ErrorReload refetchData={refetchData} /> }
+                        {!loading && !error && <ProjectedDecarbonationLoaded annual={annual} />}
+                        {error && <ErrorReloadTable refetchData={refetchData} /> }
                     </tbody>
                 </table>
             </div>
             <div className="mt-8">
-                <Pagination pageCount={pagination?.max_page} handlePageClick={handlePageClick} />
+                <Pagination pageCount={currentPage} handlePageClick={handlePageClick} />
             </div>
         </div>
     );
 }
 
-function ProjectedDecarbonationLoaded({projectedDecarbonationTable}: {projectedDecarbonationTable: ProjectedDecarbonation[]}) {
+function ProjectedDecarbonationLoaded({ annual }: { annual: Annual[] }) {
+    if (annual.length === 0) {
+        return <NoDataTable />
+    }
+
     return (
         <>
-            {projectedDecarbonationTable.map((projection: ProjectedDecarbonation, idx: number) => {
+            {annual.map((data: Annual, idx: number) => {
+                const { time_period, emissions, ex_post_issued, ex_post_purchased, ex_post_retired, target, actual_rate, delta, debt, ex_post_stock, ex_ante_stock } = data;
+
+                if (!time_period) {
+                    return null;
+                }
+
                 return (
-                    <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:brightness-110 ${parseInt(projection.year) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
-                        <td className="px-4 sticky left-0 z-10 bg-neutral-800">{projection.year}</td>
-                        <td className="px-4">{projection.emissions}</td>
-                        <td className="px-4">{projection.received_cc}</td>
-                        <td className="px-4">{projection.purchased_cc}</td>
-                        <td className="px-4">{projection.retired_cc}</td>
-                        <td className="px-4">{projection.target}</td>
-                        <td className="px-4">TBD</td>
-                        <td className="px-4">{projection.delta ? projection.delta : 'n/a'}</td>
-                        <td className="px-4">TBD</td>
-                        <td className="px-4">TBD</td>
-                        <td className="px-4">TBD</td>
+                    <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:brightness-110 ${parseInt(time_period) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
+                        <td className="px-4 sticky left-0 z-10 bg-neutral-800">{time_period}</td>
+                        <td className="px-4">{emissions}</td>
+                        <td className="px-4">{ex_post_issued}</td>
+                        <td className="px-4">{ex_post_purchased}</td>
+                        <td className="px-4">{ex_post_retired}</td>
+                        <td className="px-4">{target}</td>
+                        <td className="px-4">{actual_rate}</td>
+                        <td className="px-4">{delta ? delta : 'n/a'}</td>
+                        <td className="px-4">{debt}</td>
+                        <td className="px-4">{ex_post_stock}</td>
+                        <td className="px-4">{ex_ante_stock}</td>
                     </tr>
                 )
             })}
