@@ -4,7 +4,7 @@ import SecondaryButton from "~/components/common/Buttons";
 import Pagination from "~/components/common/Pagination";
 import Title from "~/components/common/Title";
 
-export default function BusinessUnitsAllocationTable() {
+export default function BusinessUnitsAllocationTable({ projectId }: { projectId: string }) {
 
     const handlePageClick = (data: any) => {
         console.log(data);

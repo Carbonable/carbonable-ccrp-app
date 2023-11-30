@@ -7,6 +7,7 @@ query GetGlobalData {
         actual
         debt
         number_of_projects
+        invested_amount
     }
   }
 `;
