@@ -2,8 +2,9 @@ import DefaultLayout from "~/layouts/DefaultLayout";
 import BackButton from "../common/BackButton";
 import ProjectInfo from "./info/ProjectInfo";
 import { GreenButton } from "../common/Buttons";
+import type { Project } from "~/graphql/__generated__/graphql";
 
-export default function ProjectHeader() {
+export default function ProjectHeader({ project }: { project: Project }) {
     const handleAction = () => {
         console.log("Allocate");
     }

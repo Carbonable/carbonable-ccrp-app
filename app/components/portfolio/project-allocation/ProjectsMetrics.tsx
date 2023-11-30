@@ -1,14 +1,21 @@
 import { useQuery } from "@apollo/client";
 import type { ProjectMetrics } from "~/graphql/__generated__/graphql";
-import { GET_PROJECTS_METRICS } from "~/graphql/queries";
 import ProjectsColors from "./ProjectsColors";
 import ProjectsTypes from "./ProjectsTypes";
 import ProjectsStandards from "./ProjectsStandards";
 import ErrorReload from "../../common/ErrorReload";
 import ProjectsCountries from "./ProjectsCountries";
+import { GET_PROJECTS_METRICS } from "~/graphql/queries/projects";
+import { CARBONABLE_COMPANY_ID } from "~/utils/constant";
 
 export default function ProjectsMetrics() {
-    const { loading, error, data, refetch } = useQuery(GET_PROJECTS_METRICS);
+    const { loading, error, data, refetch } = useQuery(GET_PROJECTS_METRICS, {
+        variables: {
+            view: {
+                company_id: CARBONABLE_COMPANY_ID,
+            }
+        }
+    });
 
     if (error) {
         console.error(error);

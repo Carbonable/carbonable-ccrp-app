@@ -865,10 +865,6 @@ video {
   height: 100%;
 }
 
-.h-32 {
-  height: 8rem;
-}
-
 .max-h-60 {
   max-height: 15rem;
 }
@@ -969,10 +965,6 @@ video {
 .w-max {
   width: -moz-max-content;
   width: max-content;
-}
-
-.w-32 {
-  width: 8rem;
 }
 
 .min-w-\[32px\] {
@@ -1322,10 +1314,6 @@ video {
 
 .border-t-\[2px\] {
   border-top-width: 2px;
-}
-
-.border-b-2 {
-  border-bottom-width: 2px;
 }
 
 .border-greenish-700 {
@@ -2233,6 +2221,10 @@ video {
 
   .lg\:p-12 {
     padding: 3rem;
+  }
+
+  .lg\:p-4 {
+    padding: 1rem;
   }
 
   .lg\:p-8 {

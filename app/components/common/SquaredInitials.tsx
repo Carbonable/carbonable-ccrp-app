@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { getProjectColor } from "~/utils/utils";
 
-export default function SquaredInitials({ text, color }: { text: string, color: string }) {
+export default function SquaredInitials({ text, color }: { text: string | any, color: string | any }) {
     const [backgroundColor] = useState(getProjectColor(color));
 
     if (!text) return null;
