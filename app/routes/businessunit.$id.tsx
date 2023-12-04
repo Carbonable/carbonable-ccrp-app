@@ -36,11 +36,11 @@ export default function Index() {
                 </div>
                 <div className="mt-16">
                     <Title title="Projected decarbonation" />
-                    <DecarbonationOverview />
+                    <DecarbonationOverview businessUnitId={id} />
                 </div>
                 <div className="mt-16">
                     <Title title="Project metrics" />
-                    <ProjectsMetrics />
+                    <ProjectsMetrics businessUnitId={id} />
                 </div>
                 <div className="mt-16 mb-12">
                     <Title title="Impact metrics" />

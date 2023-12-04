@@ -1,6 +1,6 @@
 import type { Map } from "~/graphql/__generated__/graphql";
-import { SmallTitle } from "../../common/Title";
-import SquaredInitials from "../../common/SquaredInitials";
+import { SmallTitle } from "../Title";
+import SquaredInitials from "../SquaredInitials";
 import { getNumericPercentage } from "~/utils/utils";
 
 export default function ProjectsStandards({ standards }: { standards: Map[] }) {

@@ -1,8 +1,8 @@
 import type { ProjectTypeRepartition } from "~/graphql/__generated__/graphql";
-import { SmallTitle } from "../../common/Title";
+import { SmallTitle } from "../Title";
 import { Bar, BarChart, ResponsiveContainer } from "recharts";
 import { getNumericPercentage } from "~/utils/utils";
-import { CustomLegend } from "../../common/CustomGraphLegend";
+import { CustomLegend } from "../CustomGraphLegend";
 
 export default function ProjectsTypes({ types }: { types: ProjectTypeRepartition }) {
     const transformedTypes = transformTypesObject(types);
