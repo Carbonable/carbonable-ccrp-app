@@ -8,16 +8,16 @@ import { GET_PROJECT_WITHOUT_VINTAGES } from "~/graphql/queries/projects";
 import DefaultLayout from "~/layouts/DefaultLayout";
 
 export async function loader({ params }: LoaderArgs) {
-    return json({ mapboxKey: process.env.MAPBOX_KEY, trackingActivated: process.env.TRACKING_ACTIVATED === "true", project_id: params.id });
+    return json({ mapboxKey: process.env.MAPBOX_KEY, trackingActivated: process.env.TRACKING_ACTIVATED === "true", slug: params.slug });
 }
 
 export default function Index() {
-    const { mapboxKey, trackingActivated, project_id } = useLoaderData();
+    const { mapboxKey, trackingActivated, slug } = useLoaderData();
 
     const { loading, error, data } = useQuery(GET_PROJECT_WITHOUT_VINTAGES, {
         variables: {
             field: "id",
-            value: project_id
+            value: slug
         }
     });
 
@@ -37,7 +37,6 @@ export default function Index() {
         )
     }
 
-    console.log(loading, error, data);  
     const project: Project = data?.projectBy;
 
     return (

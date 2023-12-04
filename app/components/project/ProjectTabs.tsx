@@ -21,7 +21,7 @@ export default function ProjectTabs({ mapboxKey, project, trackingActivated}: { 
                     <Tabs.Content value="overview" className={contentClassName}><Overview project={project} /></Tabs.Content>
                     <Tabs.Content value="management" className={contentClassName}><CarbonManagement project={project} /></Tabs.Content>
                     <Tabs.Content value="tracking" className={contentClassName}><Tracking mapboxKey={mapboxKey} slug={project.id} trackingActivated={trackingActivated} /></Tabs.Content>
-                    <Tabs.Content value="impact" className={contentClassName}><ProjectImpact /></Tabs.Content>
+                    <Tabs.Content value="impact" className={contentClassName}><ProjectImpact projectId={project.id} /></Tabs.Content>
                 </div>
             </Tabs.List>
         </Tabs.Root>
