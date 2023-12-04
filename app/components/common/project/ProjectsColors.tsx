@@ -1,7 +1,7 @@
 import type { ProjectColorRepartition } from "~/graphql/__generated__/graphql";
-import { SmallTitle } from "../../common/Title";
+import { SmallTitle } from "../Title";
 import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
-import { CustomLegend } from "../../common/CustomGraphLegend";
+import { CustomLegend } from "../CustomGraphLegend";
 import { getNumericPercentage } from "~/utils/utils";
 
 export default function ProjectsColors({ colors }: { colors: ProjectColorRepartition }) {
