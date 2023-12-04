@@ -8,7 +8,7 @@ import Title from "~/components/common/Title";
 import ProjectFundingAllocation from "~/components/business-units/ProjectFundingAllocation";
 import DecarbonationOverview from "~/components/business-units/Decarbonation";
 import ProjectsMetrics from "~/components/business-units/ProjectsMetrics";
-import ProjectImpact from "~/components/project/Impact";
+import ProjectImpact from "~/components/business-units/Impact";
 
 export async function loader({ params }: LoaderArgs) {
     return json({ id: params.id });
@@ -44,7 +44,7 @@ export default function Index() {
                 </div>
                 <div className="mt-16 mb-12">
                     <Title title="Impact metrics" />
-                    <ProjectImpact />
+                    <ProjectImpact businessUnitId={id} />
                 </div>
             </DefaultLayout>
         </>
