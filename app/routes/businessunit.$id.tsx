@@ -9,6 +9,12 @@ import ProjectFundingAllocation from "~/components/business-units/ProjectFunding
 import DecarbonationOverview from "~/components/business-units/Decarbonation";
 import ProjectsMetrics from "~/components/business-units/ProjectsMetrics";
 import ProjectImpact from "~/components/business-units/Impact";
+import { BUSINESS_UNITS_DETAILS } from "~/graphql/queries/business-units";
+import { useQuery } from "@apollo/client";
+import type { BusinessUnit } from "~/graphql/__generated__/graphql";
+import { useState } from "react";
+import AllocationDialogComponent from "~/components/common/Dialog";
+import { AllocationType } from "~/types/allocation";
 
 export async function loader({ params }: LoaderArgs) {
     return json({ id: params.id });
@@ -16,23 +22,69 @@ export async function loader({ params }: LoaderArgs) {
 
 export default function Index() {
     const { id } = useLoaderData();
+    const [isOpen, setIsOpen] = useState(false);
+    const { loading, error, data } = useQuery(BUSINESS_UNITS_DETAILS, {
+        variables: {
+            id: id
+        }
+    });
 
-    return (
-        <>
+    const businessUnit: BusinessUnit = data?.businessUnitDetails;
+
+    const openAllocation = () => {
+        setIsOpen(true);
+    }
+
+    if (loading) {
+        return (
             <DefaultLayout>
-                <BackButton link="/?opentab=businessunit" />
                 <div className="flex justify-between items-center mt-12 px-4">
                     <div className="text-xl uppercase">
-                        Business unit {id}
+                        Loading...
                     </div>
                     <div className="text-right">
                         <SecondaryButton>Add allocation</SecondaryButton>
                     </div>
                 </div>
-                <GlobalData />
+            </DefaultLayout>
+        )
+    }
+
+    if (error) {
+        console.error(error);
+
+        return (
+            <DefaultLayout>
+                <div className="flex justify-between items-center mt-12 px-4">
+                    <div className="text-xl uppercase">
+                        Error
+                    </div>
+                    <div className="text-right">
+                        <SecondaryButton>Add allocation</SecondaryButton>
+                    </div>
+                </div>
+            </DefaultLayout>
+        )
+    }
+
+    return (
+        <>
+            <DefaultLayout>
+                <BackButton link="/?opentab=businessunit" />
+                <div className="flex justify-between items-center mt-12 pl-4">
+                    <div className="text-xl uppercase">
+                        {businessUnit.name}
+                    </div>
+                    <div className="text-right">
+                        <SecondaryButton onClick={openAllocation}>Add allocation</SecondaryButton>
+                    </div>
+                </div>
+                <div className="mt-16">
+                    <GlobalData businessUnitId={id} />
+                </div>
                 <div className="mt-16">
                     <Title title="Projects Allocation" />
-                    <ProjectFundingAllocation />
+                    <ProjectFundingAllocation businessUnitId={id} />
                 </div>
                 <div className="mt-16">
                     <Title title="Projected decarbonation" />
@@ -47,6 +99,7 @@ export default function Index() {
                     <ProjectImpact businessUnitId={id} />
                 </div>
             </DefaultLayout>
+            <AllocationDialogComponent isOpen={isOpen} setIsOpen={setIsOpen} businessUnitId={id} type={AllocationType.BU} />
         </>
     )
 }

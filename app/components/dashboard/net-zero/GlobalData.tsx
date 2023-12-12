@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
-import { GlobalKPI } from "~/components/common/KPI";
 import type { GlobalData } from "~/graphql/__generated__/graphql";
 import { GET_GLOBAL_DATA } from "~/graphql/queries/net-zero";
+import GlobalDataComponent from "../../common/global-data/GlobalData";
 
 
 export default function GlobalData() {
@@ -15,14 +15,5 @@ export default function GlobalData() {
         refetch();
     }
 
-    const globalData: GlobalData = data?.getGlobalData;
-
-    return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mt-4">
-            <GlobalKPI title="Target (current year)" kpi={globalData?.target} loading={loading} error={error} refetchData={refetchData} />
-            <GlobalKPI title="Actual (current year)" kpi={globalData?.actual} loading={loading} error={error} refetchData={refetchData} />
-            <GlobalKPI title="Debt (current year)" kpi={globalData?.debt} loading={loading} error={error} refetchData={refetchData} />
-            <GlobalKPI title="Number of projects" kpi={globalData?.number_of_projects} loading={loading} error={error} refetchData={refetchData} />
-        </div>
-    );
+    return <GlobalDataComponent loading={loading} error={error} data={data} refetch={refetchData} />
 }

@@ -5,6 +5,7 @@ query Projects {
     projects {
         id
         name
+        slug
         metadata
     }
   }
@@ -22,6 +23,7 @@ query ProjectBy($field: String!, $value: String!) {
       area
       type
       origin
+      slug
       certifier {
         id
         name
@@ -35,6 +37,14 @@ query ProjectBy($field: String!, $value: String!) {
         code
       }
       metadata
+      global_data {
+        amount
+        source
+        rating
+        allocated_units
+        available_ex_post
+        available_ex_ante
+      }
     }
   }
 `;

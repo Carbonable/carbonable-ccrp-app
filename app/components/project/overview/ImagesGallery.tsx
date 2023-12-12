@@ -11,12 +11,12 @@ export default function ImageGallery({images, videos}: {images: any[], videos: a
                     <img src={urlFor(image).width(500).url()} alt={`image_${index}`} className={`w-full object-cover outline-none` } />
                 </div>
             ))}
-            {videos.map((video, index) => (
+            {videos && videos.map((video, index) => (
                 <div key={`video_${index}`} className="outline-none">
                     <ReactPlayer 
                         width="100%" 
                         height="100%" 
-                        url='https://www.youtube.com/watch?v=LXb3EKWsInQ'
+                        url={video}
                     />
                 </div>
             ))}

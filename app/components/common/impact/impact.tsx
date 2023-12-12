@@ -3,8 +3,9 @@ import { CARBONABLE_COMPANY_ID } from "~/utils/constant";
 import ErrorReload from "../ErrorReload";
 import { ImpactTitle } from "../Title";
 import { LinkSecondary } from "../Buttons";
+import type { ApolloError } from "@apollo/client";
 
-export default function Impact({ loading, error, data, refetch }: { loading: boolean, error: any, data: any, refetch: any }) {
+export default function ImpactComponent({ loading, error, data, refetch }: { loading: boolean, error: ApolloError | undefined, data: any, refetch: any }) {
     const cssBlock = "border border-neutral-500 rounded-xl px-6 py-4 bg-neutral-700"
     
     const refetchData = () => {
@@ -21,6 +22,14 @@ export default function Impact({ loading, error, data, refetch }: { loading: boo
         return (
             <div className="mt-12 w-full">
                 Loading ...
+            </div>
+        )
+    }
+
+    if (error && error.message.includes("42P01")) {
+        return (
+            <div className="mt-12 w-full">
+                No allocations yet
             </div>
         )
     }

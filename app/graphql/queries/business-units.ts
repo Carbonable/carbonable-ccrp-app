@@ -6,8 +6,14 @@ export const BUSINESS_UNITS = gql`
 			id
 			name
 			description
+			default_emission
 			default_target
-			default_target
+			metadata {
+				key
+				value
+			}
+			yearly_emissions
+			yearly_contributions
     }
   }
 `;
@@ -18,12 +24,27 @@ export const BUSINESS_UNITS_DETAILS = gql`
 			id
 			name
 			description
-			default_target
+			default_emission
 			default_target
 			metadata {
 				key
 				value
 			}
+			allocations {
+				project
+				amount
+			}
+			yearly_emissions
+			yearly_contributions
+		}
+	}
+`;
+
+export const CREATE_BUSINESS_UNIT = gql`
+	mutation createBusinessUnit($request: CreateBusinessUnitRequest!) {
+		createBusinessUnit(request: $request) {
+			id 
+			errors
 		}
 	}
 `;

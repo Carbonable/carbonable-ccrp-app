@@ -4,8 +4,9 @@ import ProjectsTypes from "./ProjectsTypes";
 import ProjectsStandards from "./ProjectsStandards";
 import ErrorReload from "../../common/ErrorReload";
 import ProjectsCountries from "./ProjectsCountries";
+import type { ApolloError } from "@apollo/client";
 
-export default function ProjectsMetricsComponenent({loading, error, data, refetch}: {loading: boolean, error: any, data: any, refetch: any}) {
+export default function ProjectsMetricsComponenent({loading, error, data, refetch}: {loading: boolean, error: ApolloError | undefined, data: any, refetch: any}) {
 
     if (error) {
         console.error(error);
@@ -25,6 +26,14 @@ export default function ProjectsMetricsComponenent({loading, error, data, refetc
         )
     }
 
+    if (error && error.message.includes("42P01")) {
+        return (
+            <div className="mt-12 w-full">
+                No allocations yet
+            </div>
+        )
+    }
+
     if (error) {
         return (
             <div className="mt-12 w-full">
@@ -32,6 +41,7 @@ export default function ProjectsMetricsComponenent({loading, error, data, refetc
             </div>
         )
     }
+
 
     return (
         <div className="mt-12 w-full">

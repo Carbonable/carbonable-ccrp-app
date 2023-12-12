@@ -14,7 +14,7 @@ export default function Overview({ project }: { project: Project}) {
             try {
                 const result = await client.fetch(
                     `*[_type == "project" && slug.current == $slug]`,
-                    { slug: project.id }
+                    { slug: project.slug }
                 );
       
                 setContent(result[0]); // Assuming you expect a single project
