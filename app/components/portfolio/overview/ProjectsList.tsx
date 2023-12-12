@@ -22,6 +22,16 @@ export default function ProjectsList() {
         )
     }
 
+    if (error) {
+        return (
+            <div className="flex justify-between items-center flex-wrap">
+                <div className="font-extrabold text-neutral-100 text-lg uppercase w-full md:w-fit">
+                    Error: {error.message}
+                </div>
+            </div>
+        )
+    }
+
     return (
         <>
             <div className="flex justify-between items-center flex-wrap">
@@ -34,7 +44,7 @@ export default function ProjectsList() {
                     {projects.map((project: Project, idx: number) => (
                         <a 
                             key={`project_${project.id}_${idx}`}
-                            href={`/portfolio/${project.id}`}
+                            href={`/portfolio/${project.slug}`}
                             className="overflow-hidden text-ellipsis"
                         >
                             Project {project.name}

@@ -122,18 +122,18 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                     <YAxis yAxisId="right" orientation="right" label={{ value: 'Target (%)', angle: 90, position: 'insideRight' }} domain={[0, 100]} />
                     <Tooltip content={<CustomTooltip />} />
                     {!isFullScreen && <Legend /> }
-                    <Bar dataKey="emissions" name="Emission" yAxisId="left" barSize={10} fill="#334566" radius={[10, 10, 0, 0]} />
-                    <Bar dataKey="data[1].value" name={bar1Name} yAxisId="left" stackId="a" barSize={10} fill="#046B4D">
+                    <Bar dataKey="emission" name="Emission" yAxisId="left" barSize={10} fill="#334566" radius={[10, 10, 0, 0]} />
+                    <Bar dataKey="ex_post_count" name={bar1Name} yAxisId="left" stackId="a" barSize={10} fill="#046B4D">
                         {netZeroPlanning.map((entry: any, index: number) => {
                             return (
                                 // @ts-ignore
-                                <Cell key={`cell-${index}`} radius={entry.data[0].value === 0 ? [10, 10, 0, 0] : undefined} />
+                                <Cell key={`cell-${index}`} radius={entry.ex_ante_count === 0 ? [10, 10, 0, 0] : undefined} />
                             );
                         })}
                     </Bar>
-                    <Bar dataKey="data[0].value" name={bar2Name} yAxisId="left" stackId="a" barSize={10} fill="#06A475" radius={[10, 10, 0, 0]} />
-                    <Line type="monotone" name="Target" yAxisId="right" dataKey="target" stroke="#D0D1D6" strokeWidth={2} dot={false} activeDot={false} />
-                    <Line type="monotone" name="Actual" yAxisId="right" dataKey="actual" stroke="#877B44" strokeWidth={2} dot={false} activeDot={false} />
+                    <Bar dataKey="ex_ante_count" name={bar2Name} yAxisId="left" stackId="a" barSize={10} fill="#06A475" radius={[10, 10, 0, 0]} />
+                    <Line type="monotone" name="target" yAxisId="right" dataKey="target" stroke="#D0D1D6" strokeWidth={2} dot={false} activeDot={false} />
+                    <Line type="monotone" name="actual" yAxisId="right" dataKey="actual" stroke="#877B44" strokeWidth={2} dot={false} activeDot={false} />
                 </ComposedChart>
             </ResponsiveContainer>
             <div className="text-neutral-300 text-sm lg:text-lg font-inter text-center w-fit mx-auto md:mt-2 lg:mt-0">

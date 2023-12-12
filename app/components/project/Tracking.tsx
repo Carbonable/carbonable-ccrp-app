@@ -9,14 +9,13 @@ import { MapButton } from "../common/Buttons";
 import MapSelect from "../filters/MapSelect";
 import mapboxgl from "mapbox-gl";
 import type { Coordinates, Dmrv, Ndvi, Rgb } from "~/types/dmrv";
-import { useFetcher } from "@remix-run/react";
 
 export enum TrackingIndicator {
     NDVI = "ndvi",
     RGB = "rgb"
 }
 
-export default function Tracking({ mapboxKey, slug, trackingActivated}: { mapboxKey: string, slug: string, trackingActivated: boolean}) {
+export default function Tracking({ mapboxKey, dmrv}: { mapboxKey: string, dmrv: Dmrv | undefined}) {
     mapboxgl.accessToken = mapboxKey;
     const mapContainer = useRef<any>(null);
     const map = useRef<mapboxgl.Map | null>(null);
@@ -30,21 +29,6 @@ export default function Tracking({ mapboxKey, slug, trackingActivated}: { mapbox
     const [selectedDateIndex, setSelectedDateIndex] = useState<number | undefined>(undefined);
     const [selectedImageIndex, setSelectedImageIndex] = useState<number | undefined>(undefined);
     const [isOpen, setIsOpen] = useState<boolean>(false);
-    const fetcherDmrv = useFetcher();
-    const [dmrv, setDmrv] = useState<Dmrv | undefined>(undefined);
-
-    useEffect(() => {
-        if (fetcherDmrv.data !== undefined || trackingActivated === false) return;
-    
-          fetcherDmrv.load(`/api/dmrv?slug=${slug}`);
-      }, []);
-
-    useEffect(() => {
-        if (fetcherDmrv.data === undefined) return;
-    
-        const data = fetcherDmrv.data;
-        setDmrv(data);
-      }, [fetcherDmrv.data]);
     
     useEffect(() => {
         if (dmrv === undefined || dmrv?.hasOwnProperty('indicators') === false) return;
@@ -180,7 +164,7 @@ export default function Tracking({ mapboxKey, slug, trackingActivated}: { mapbox
         });
     }, [bounds, coordinates, ndvis, selectedImageIndex, map]);
 
-    if (fetcherDmrv.state === 'loading') {
+    if (mapLoaded === false) {
         return (
             <>
                 <Title title="Tracking" isBeta={true} />
@@ -190,7 +174,7 @@ export default function Tracking({ mapboxKey, slug, trackingActivated}: { mapbox
             </>
         )
     }
-
+    
     if (dmrv === undefined || selectedDateIndex === undefined || ndvis === undefined) {
         return (
             <>

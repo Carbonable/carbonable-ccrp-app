@@ -1,12 +1,14 @@
 import SecondaryButton from "~/components/common/Buttons";
 import Block from "./Block";
-import { useQuery } from "@apollo/client";
-import { BUSINESS_UNITS } from "~/graphql/queries/business-units";
+import { useMutation, useQuery } from "@apollo/client";
+import { BUSINESS_UNITS, CREATE_BUSINESS_UNIT } from "~/graphql/queries/business-units";
 import type { BusinessUnit } from "~/graphql/__generated__/graphql";
 import ErrorReload from "~/components/common/ErrorReload";
+import { CARBONABLE_COMPANY_ID } from "~/utils/constant";
 
 export default function DecarbonizationMap() {
     const { loading, error, data, refetch } = useQuery(BUSINESS_UNITS);
+    const [createMutation, { loading: loadingMutation, error: errorMutation, data: dataMutation }] = useMutation(CREATE_BUSINESS_UNIT);
 
     if (error) {
         console.error(error);
@@ -14,9 +16,31 @@ export default function DecarbonizationMap() {
 
     const businessUnits: BusinessUnit[] = data?.businessUnits;
 
-    const handleAddBlock = () => {
-        console.log('add block');
-    }
+    const handleAddBusinessUnit = async () => {
+        try {
+          // Execute the mutation function with the input variable
+            const result = await createMutation({
+                variables: {
+                    request: {
+                        name: "Usine",
+                        description: "usine",
+                        metadata:"type-usine,color-red,icon-warehouse",
+                        company_id: CARBONABLE_COMPANY_ID,
+                        default_forecasted_emission: 1000,
+                        default_target: 500
+                    }
+                }
+            });
+
+            refetch();
+    
+          // Handle the result as needed
+          console.log('Mutation result:', result);
+        } catch (error) {
+          // Handle any errors
+          console.error('Mutation error:', error);
+        }
+    };
 
     if (loading) return (
         <BusinessUnitWrapper>
@@ -31,15 +55,15 @@ export default function DecarbonizationMap() {
     )
 
     if (businessUnits.length === 0) return (
-        <BusinessUnitWrapper>
+        <BusinessUnitWrapper displayButton={true} buttonAction={handleAddBusinessUnit}>
             No business unit found
         </BusinessUnitWrapper>
     )
 
     return (
-        <BusinessUnitWrapper displayButton={true} buttonAction={handleAddBlock}>
+        <BusinessUnitWrapper displayButton={true} buttonAction={handleAddBusinessUnit}>
             {businessUnits.map((businessUnit: BusinessUnit, idx: number) => (
-                <a key={`block_${idx}`} href={`/businessunit/${idx}`} className="outline-none">
+                <a key={`block_${businessUnit.id}`} href={`/businessunit/${businessUnit.id}`} className="outline-none">
                     <Block block={businessUnit} />
                 </a>
             ))}
@@ -56,7 +80,7 @@ function BusinessUnitWrapper({ displayButton, buttonAction, children }: { displa
                 </div>
                 { displayButton && 
                     <div className="text-right w-full mt-4 md:w-fit">
-                        <SecondaryButton onClick={buttonAction}>Add block</SecondaryButton>
+                        <SecondaryButton onClick={buttonAction}>Add Business Unit</SecondaryButton>
                     </div>
                 }
             </div>

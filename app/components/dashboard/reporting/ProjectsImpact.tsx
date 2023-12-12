@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { GET_IMPACT_METRICS } from "~/graphql/queries/impact";
 import { CARBONABLE_COMPANY_ID } from "~/utils/constant";
-import Impact from "~/components/common/impact/impact";
+import ImpactComponent from "~/components/common/impact/impact";
 
 export default function ProjectsImpact() {
     const { loading, error, data, refetch } = useQuery(GET_IMPACT_METRICS, {
@@ -13,6 +13,11 @@ export default function ProjectsImpact() {
     });
    
     return (
-        <Impact loading={loading} error={error} data={data} refetch={refetch} />
+        <ImpactComponent 
+            loading={loading}
+            error={error}
+            data={data}
+            refetch={refetch}
+        />
     )
 }
