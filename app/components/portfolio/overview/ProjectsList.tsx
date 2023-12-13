@@ -31,7 +31,7 @@ export default function ProjectsList() {
             </div>
         )
     }
-
+    console.log(projects);
     return (
         <>
             <div className="flex justify-between items-center flex-wrap">
@@ -47,7 +47,7 @@ export default function ProjectsList() {
                             href={`/portfolio/${project.slug}`}
                             className="overflow-hidden text-ellipsis"
                         >
-                            Project {project.name}
+                            <img src={project.metadata?.image_url} alt={`${project.name} project`} />
                         </a>
                     ))}
                 </div>
