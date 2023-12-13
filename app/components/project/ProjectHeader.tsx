@@ -20,7 +20,7 @@ export default function ProjectHeader({ project }: { project: Project }) {
                     <BackButton />
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
                         <div className="order-1 lg:order-2">
-                            Project image
+                            <img src={project.metadata?.image_url} alt={`${project.name} project`} />
                         </div>
                         <div className="order-2 lg:order-1 lg:col-span-2">
                             <ProjectInfo name={project.name} data={project.global_data} />
