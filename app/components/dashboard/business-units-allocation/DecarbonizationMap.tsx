@@ -1,67 +1,37 @@
 import SecondaryButton from "~/components/common/Buttons";
 import Block from "./Block";
-import { useMutation, useQuery } from "@apollo/client";
-import { BUSINESS_UNITS, CREATE_BUSINESS_UNIT } from "~/graphql/queries/business-units";
+import { useQuery } from "@apollo/client";
+import { BUSINESS_UNITS } from "~/graphql/queries/business-units";
 import type { BusinessUnit } from "~/graphql/__generated__/graphql";
 import ErrorReload from "~/components/common/ErrorReload";
-import { CARBONABLE_COMPANY_ID } from "~/utils/constant";
+import DialogComponent from "~/components/business-units/creation/DialogComponent";
+import { useState } from "react";
 
 export default function DecarbonizationMap() {
     const { loading, error, data, refetch } = useQuery(BUSINESS_UNITS);
-    const [createMutation, { loading: loadingMutation, error: errorMutation, data: dataMutation }] = useMutation(CREATE_BUSINESS_UNIT);
-
-    if (error) {
-        console.error(error);
-    }
 
     const businessUnits: BusinessUnit[] = data?.businessUnits;
 
-    const handleAddBusinessUnit = async () => {
-        try {
-          // Execute the mutation function with the input variable
-            const result = await createMutation({
-                variables: {
-                    request: {
-                        name: "Usine",
-                        description: "usine",
-                        metadata:"type-usine,color-red,icon-warehouse",
-                        company_id: CARBONABLE_COMPANY_ID,
-                        default_forecasted_emission: 1000,
-                        default_target: 500
-                    }
-                }
-            });
-
-            refetch();
-    
-          // Handle the result as needed
-          console.log('Mutation result:', result);
-        } catch (error) {
-          // Handle any errors
-          console.error('Mutation error:', error);
-        }
-    };
-
     if (loading) return (
-        <BusinessUnitWrapper>
+        <BusinessUnitWrapper refetch={refetch}>
             <div className="border border-neutral-700 w-full p-4 xl:p-8 rounded-3xl cursor-pointer animate-pulse bg-opacityLight-5"></div>
         </BusinessUnitWrapper>
     )
 
     if (error) return (
-        <BusinessUnitWrapper>
+        <BusinessUnitWrapper refetch={refetch}>
             <ErrorReload refetchData={refetch} />
         </BusinessUnitWrapper>
     )
 
     if (businessUnits.length === 0) return (
-        <BusinessUnitWrapper displayButton={true} buttonAction={handleAddBusinessUnit}>
+        <BusinessUnitWrapper displayButton={true} refetch={refetch}>
             No business unit found
         </BusinessUnitWrapper>
     )
 
     return (
-        <BusinessUnitWrapper displayButton={true} buttonAction={handleAddBusinessUnit}>
+        <BusinessUnitWrapper displayButton={true} refetch={refetch}>
             {businessUnits.map((businessUnit: BusinessUnit, idx: number) => (
                 <a key={`block_${businessUnit.id}`} href={`/businessunit/${businessUnit.id}`} className="outline-none">
                     <Block block={businessUnit} />
@@ -71,7 +41,13 @@ export default function DecarbonizationMap() {
     )
 }
 
-function BusinessUnitWrapper({ displayButton, buttonAction, children }: { displayButton?: boolean, buttonAction?: any ,children?: any }) {
+function BusinessUnitWrapper({ displayButton, children, refetch }: { displayButton?: boolean,children?: any, refetch: () => void }) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const buttonAction = () => {
+        setIsOpen(true);
+    }
+
     return (
         <>
             <div className="flex justify-between items-center flex-wrap">
@@ -89,6 +65,7 @@ function BusinessUnitWrapper({ displayButton, buttonAction, children }: { displa
                     {children}
                 </div>
             </div>
+            <DialogComponent isOpen={isOpen} setIsOpen={setIsOpen} refetch={refetch} />
         </>
     )
 }
