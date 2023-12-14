@@ -31,7 +31,7 @@ export default function ProjectsList() {
             </div>
         )
     }
-    console.log(projects);
+
     return (
         <>
             <div className="flex justify-between items-center flex-wrap">

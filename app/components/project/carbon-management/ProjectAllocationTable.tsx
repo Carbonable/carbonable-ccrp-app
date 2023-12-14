@@ -1,14 +1,15 @@
 import { useQuery } from "@apollo/client";
-import { GET_BU_ALLOCATIONS } from "~/graphql/queries/allocation";
-import BUAssetsAllocationComponent from "../common/allocation/BUAssetsAllocationComponent";
 import { useEffect, useState } from "react";
+import ProjectAssetsAllocationComponent from "~/components/common/allocation/ProjectAssetsAllocationComponent";
+import { GET_PROJECT_ALLOCATIONS } from "~/graphql/queries/allocation";
 import { RESULT_PER_PAGE } from "~/utils/constant";
 
-export default function ProjectFundingAllocation({ businessUnitId }: { businessUnitId: string }) {
+
+export default function ProjectAllocationTable({ projectId }: { projectId: string }) {
     const [currentPage, setCurrentPage] = useState(1);
-    const { loading, error, data, refetch } = useQuery(GET_BU_ALLOCATIONS, {
+    const { loading, error, data, refetch } = useQuery(GET_PROJECT_ALLOCATIONS, {
         variables: {
-            id: businessUnitId,
+            id: projectId,
             pagination: {
                 page: currentPage,
                 count: RESULT_PER_PAGE
@@ -18,7 +19,7 @@ export default function ProjectFundingAllocation({ businessUnitId }: { businessU
 
     const refetchData = () => {
         refetch({
-            id: businessUnitId,
+            id: projectId,
             pagination: {
                 page: currentPage,
                 count: RESULT_PER_PAGE
@@ -30,12 +31,11 @@ export default function ProjectFundingAllocation({ businessUnitId }: { businessU
         refetchData();
     }, [currentPage]);
 
-
-    return <BUAssetsAllocationComponent 
+    return <ProjectAssetsAllocationComponent 
         loading={loading}
         error={error}
         data={data}
-        setCurrentPage={setCurrentPage}
         refetchData={refetchData}
+        setCurrentPage={setCurrentPage}
     />
 }
