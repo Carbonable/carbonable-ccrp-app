@@ -20,7 +20,7 @@ export default function ProjectDecarbonationTableComponent({ loading, error, dat
     
     return (
         <div className="mt-12 w-full">
-            <Title title="Annual" />
+            <Title title="Stock - Annual" />
             <div className="mt-4 w-full font-inter text-sm overflow-x-auto border border-neutral-600">
                 <table className="table-auto text-left min-w-full">
                     <thead className="bg-neutral-500 text-neutral-100 whitespace-nowrap h-10">

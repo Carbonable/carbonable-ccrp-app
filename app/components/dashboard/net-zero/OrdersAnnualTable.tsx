@@ -4,13 +4,13 @@ import { ErrorReloadTable, NoDataTable } from "~/components/common/ErrorReload";
 import Pagination from "~/components/common/Pagination";
 import Title from "~/components/common/Title";
 import TableLoading from "~/components/table/TableLoading";
-import type { CumulativeData, PageInfo } from "~/graphql/__generated__/graphql";
-import { CUMULATIVE } from "~/graphql/queries/net-zero";
+import type { PageInfo, StockData } from "~/graphql/__generated__/graphql";
+import { GET_STOCKS } from "~/graphql/queries/stock";
 import { CARBONABLE_COMPANY_ID, RESULT_PER_PAGE } from "~/utils/constant";
 
-export default function ProjectDecarbonationTableCumulative() {
+export default function OrdersAnnualTable() {
     const [currentPage, setCurrentPage] = useState(1);
-    const { loading, error, data, refetch } = useQuery(CUMULATIVE, {
+    const { loading, error, data, refetch } = useQuery(GET_STOCKS, {
         variables: {
             view: {
                 company_id: CARBONABLE_COMPANY_ID
@@ -34,8 +34,8 @@ export default function ProjectDecarbonationTableCumulative() {
         });
     }
 
-    const cumulative: CumulativeData[] = data?.cumulative.data;
-    const pagination: PageInfo = data?.cumulative.page_info;
+    const stocks: StockData[] = data?.getStock.data;
+    const pagination: PageInfo = data?.getStock.page_info;
 
     const handlePageClick = (data: any) => {
         setCurrentPage(data.selected + 1);
@@ -47,23 +47,21 @@ export default function ProjectDecarbonationTableCumulative() {
     
     return (
         <div className="mt-12 w-full">
-            <Title title="Stock - Cumulative" />
+            <Title title="Orders - Annual" />
             <div className="mt-4 w-full font-inter text-sm overflow-x-auto border border-neutral-600">
                 <table className="table-auto text-left min-w-full">
                     <thead className="bg-neutral-500 text-neutral-100 whitespace-nowrap h-10">
                         <tr>
                             <th className="px-4 sticky left-0 z-10 bg-neutral-500">Time Period</th>
-                            <th className="px-4">Cumulative Emissions</th>
-                            <th className="px-4">Cumulative Retired</th>
-                            <th className="px-4">Cumulative Issued</th>
-                            <th className="px-4">Cumulative Purchased</th>
-                            <th className="px-4">Cumulative Delta</th>
-                            <th className="px-4">Cumulative Emission Debt</th>
+                            <th className="px-4">Project</th>
+                            <th className="px-4">Qty allocated</th>
+                            <th className="px-4">Stock available</th>
+                            <th className="px-4">Qty Locked</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {loading && <TableLoading resultsPerPage={RESULT_PER_PAGE} numberOfColumns={11} />}
-                        {!loading && !error && <ProjectedDecarbonationLoaded cumulative={cumulative} />}
+                        {loading && <TableLoading resultsPerPage={RESULT_PER_PAGE} numberOfColumns={5} />}
+                        {!loading && !error && <TableLoaded stocks={stocks} />}
                         {error && <ErrorReloadTable refetchData={refetchData} /> }
                     </tbody>
                 </table>
@@ -75,29 +73,33 @@ export default function ProjectDecarbonationTableCumulative() {
     );
 }
 
-function ProjectedDecarbonationLoaded({cumulative}: {cumulative: CumulativeData[]}) {
-    if (cumulative.length === 0) {
+function TableLoaded({stocks}: {stocks: StockData[]}) {
+    if (stocks.length === 0) {
         return <NoDataTable />
     }
 
     return (
         <>
-            {cumulative.map((data: any, idx: number) => {
-                const { time_period, emissions, ex_post_issued, ex_post_purchased, ex_post_retired, delta, debt } = data;
+            {stocks.map((data: StockData, idx: number) => {
+                const { 
+                    vintage,
+                    project,
+                    quantity,
+                    available,
+                    locked
+                } = data;
 
-                if (!time_period) {
+                if (!vintage) {
                     return null;
                 }
 
                 return (
-                    <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:brightness-110 ${parseInt(time_period) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
-                        <td className="px-4 sticky left-0 z-10 bg-neutral-800">{time_period}</td>
-                        <td className="px-4">{emissions}</td>
-                        <td className="px-4">{ex_post_retired}</td>
-                        <td className="px-4">{ex_post_issued}</td>
-                        <td className="px-4">{ex_post_purchased}</td>
-                        <td className="px-4">{delta ? delta : 'n/a'}</td>
-                        <td className="px-4">{debt}</td>
+                    <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:brightness-110 ${parseInt(vintage) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
+                        <td className="px-4 sticky left-0 z-10 bg-neutral-800">{vintage}</td>
+                        <td className="px-4">{project.name}</td>
+                        <td className="px-4">{quantity}</td>
+                        <td className="px-4">{available}</td>
+                        <td className="px-4">{locked}</td>
                     </tr>
                 )
             })}
