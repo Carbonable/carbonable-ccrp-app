@@ -3,24 +3,20 @@ import { ErrorReloadTable, NoDataTable } from "../ErrorReload";
 import Pagination from "../Pagination";
 import SquaredInitials from "../SquaredInitials";
 import SecondaryButton from "../Buttons";
-import type { ProjectCarbonAssetAllocation } from "~/graphql/__generated__/graphql";
+import type { PageInfo, ProjectCarbonAssetAllocationData } from "~/graphql/__generated__/graphql";
+import { RESULT_PER_PAGE } from "~/utils/constant";
 
-export default function ProjectAssetsAllocationComponent({ data, loading, error, refetch }: { data: any, loading: boolean, error: any, refetch: any }) {
-    const currentPage = 1;
-    const resultsPerPage = 5;
+export default function ProjectAssetsAllocationComponent({ data, loading, error, refetchData, setCurrentPage }: { data: any, loading: boolean, error: any, refetchData: any, setCurrentPage: (page: number) => void }) {
 
     if (error) {
         console.error(error);
     }
 
-    const refetchData = () => {
-        refetch();
-    }
-
-    const carbonAssetAllocation: ProjectCarbonAssetAllocation[] = data?.projectCarbonAssetAllocation;
+    const carbonAssetAllocation: ProjectCarbonAssetAllocationData[] = data?.projectCarbonAssetAllocation.data;
+    const pagination: PageInfo = data?.projectCarbonAssetAllocation.page_info;
 
     const handlePageClick = (data: any) => {
-        refetch();
+        setCurrentPage(data.selected + 1);
     }
 
     return (
@@ -39,27 +35,27 @@ export default function ProjectAssetsAllocationComponent({ data, loading, error,
                         </tr>
                     </thead>
                     <tbody>
-                        {loading && <TableLoading resultsPerPage={resultsPerPage} numberOfColumns={6} />}
+                        {loading && <TableLoading resultsPerPage={RESULT_PER_PAGE} numberOfColumns={6} />}
                         {!loading && !error && <ProjectFundingAllocationLoaded carbonAssetAllocation={carbonAssetAllocation} />}
                         {error && <ErrorReloadTable refetchData={refetchData} /> }
                     </tbody>
                 </table>
             </div>
             <div className="mt-8">
-                <Pagination pageCount={currentPage} handlePageClick={handlePageClick} />
+                <Pagination pageCount={pagination?.total_page} handlePageClick={handlePageClick} />
             </div>
         </div>
     );
 }
 
-function ProjectFundingAllocationLoaded({carbonAssetAllocation}: {carbonAssetAllocation: ProjectCarbonAssetAllocation[]}) {
+function ProjectFundingAllocationLoaded({carbonAssetAllocation}: {carbonAssetAllocation: ProjectCarbonAssetAllocationData[]}) {
     if (carbonAssetAllocation.length === 0) {
         return <NoDataTable />
     }
 
     return (
         <>
-            {carbonAssetAllocation.map((allocation: ProjectCarbonAssetAllocation, idx: number) => {
+            {carbonAssetAllocation.map((allocation: ProjectCarbonAssetAllocationData, idx: number) => {
                 return (
                     <tr key={`projection_${idx}`} className="border-b h-12 last:border-b-0 border-neutral-600 bg-neutral-800 hover:brightness-110 items-center text-neutral-200 whitespace-nowrap group">
                         <td className="px-4 sticky left-0 z-10 bg-neutral-800">

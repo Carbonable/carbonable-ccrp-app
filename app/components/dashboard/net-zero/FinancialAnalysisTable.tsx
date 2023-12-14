@@ -1,32 +1,49 @@
 import { useQuery } from "@apollo/client";
+import { useEffect, useState } from "react";
 import { ErrorReloadTable, NoDataTable } from "~/components/common/ErrorReload";
 import Pagination from "~/components/common/Pagination";
 import Title from "~/components/common/Title";
 import TableLoading from "~/components/table/TableLoading";
-import type { FinancialAnalysis } from "~/graphql/__generated__/graphql";
+import type { FinancialAnalysisData, PageInfo } from "~/graphql/__generated__/graphql";
 import { FINANCIAL_ANALYSIS } from "~/graphql/queries/net-zero";
-import { CARBONABLE_COMPANY_ID } from "~/utils/constant";
+import { CARBONABLE_COMPANY_ID, RESULT_PER_PAGE } from "~/utils/constant";
 
 export default function FinancialAnalysisTable() {
-    const currentPage = 1;
-    const resultsPerPage = 5;
+    const [currentPage, setCurrentPage] = useState(1);
     const { loading, error, data, refetch } = useQuery(FINANCIAL_ANALYSIS, {
         variables: {
             view: {
                 company_id: CARBONABLE_COMPANY_ID
+            },
+            pagination: {
+                page: currentPage,
+                count: RESULT_PER_PAGE
             }
         }
     });
 
     const refetchData = () => {
-        refetch();
+        refetch({
+            view: {
+                company_id: CARBONABLE_COMPANY_ID
+            },
+            pagination: {
+                page: currentPage,
+                count: RESULT_PER_PAGE
+            }
+        });
     }
 
-    const financialAnalysis: FinancialAnalysis[] = data?.financialAnalysis;
+    const financialAnalysis: FinancialAnalysisData[] = data?.financialAnalysis.data;
+    const pagination: PageInfo = data?.financialAnalysis.page_info;
 
     const handlePageClick = (data: any) => {
-        refetch();
+        setCurrentPage(data.selected + 1);
     }
+
+    useEffect(() => {
+        refetchData();
+    }, [currentPage]);
     
     return (
         <div className="mt-12 w-full">
@@ -51,27 +68,27 @@ export default function FinancialAnalysisTable() {
                         </tr>
                     </thead>
                     <tbody>
-                        {loading && <TableLoading resultsPerPage={resultsPerPage} numberOfColumns={11} />}
+                        {loading && <TableLoading resultsPerPage={RESULT_PER_PAGE} numberOfColumns={11} />}
                         {!loading && !error && <TableLoaded financialAnalysis={financialAnalysis} />}
                         {error && <ErrorReloadTable refetchData={refetchData} /> }
                     </tbody>
                 </table>
             </div>
             <div className="mt-8">
-                <Pagination pageCount={currentPage} handlePageClick={handlePageClick} />
+                <Pagination pageCount={pagination?.total_page} handlePageClick={handlePageClick} />
             </div>
         </div>
     );
 }
 
-function TableLoaded({financialAnalysis}: {financialAnalysis: FinancialAnalysis[]}) {
+function TableLoaded({financialAnalysis}: {financialAnalysis: FinancialAnalysisData[]}) {
     if (financialAnalysis.length === 0) {
         return <NoDataTable />
     }
 
     return (
         <>
-            {financialAnalysis.map((data: FinancialAnalysis, idx: number) => {
+            {financialAnalysis.map((data: FinancialAnalysisData, idx: number) => {
                 const { 
                     year,
                     purchased_price,

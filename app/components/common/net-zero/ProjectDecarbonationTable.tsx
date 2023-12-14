@@ -1,25 +1,21 @@
 import Pagination from "../../common/Pagination";
-import type { Annual } from "~/graphql/__generated__/graphql";
+import type { AnnualData, PageInfo } from "~/graphql/__generated__/graphql";
 import { ErrorReloadTable, NoDataTable } from "../../common/ErrorReload";
 import Title from "~/components/common/Title";
 import TableLoading from "~/components/table/TableLoading";
+import { RESULT_PER_PAGE } from "~/utils/constant";
 
-export default function ProjectDecarbonationTableComponent({ loading, error, data, refetch }: { loading: boolean, error: any, data: any, refetch: any }) {
-    const currentPage = 1;
-    const resultsPerPage = 5;
+export default function ProjectDecarbonationTableComponent({ loading, error, data, refetchData, setCurrentPage }: { loading: boolean, error: any, data: any, refetchData: any, setCurrentPage: (page: number) => void }) {
 
     if (error) {
         console.error(error);
     }
 
-    const refetchData = () => {
-        refetch();
-    }
-
-    const annual: Annual[] = data?.annual;
+    const annual: AnnualData[] = data?.annual.data;
+    const pagination: PageInfo = data?.annual.page_info;
 
     const handlePageClick = (data: any) => {
-        refetch();
+        setCurrentPage(data.selected + 1);
     }
     
     return (
@@ -43,27 +39,27 @@ export default function ProjectDecarbonationTableComponent({ loading, error, dat
                         </tr>
                     </thead>
                     <tbody>
-                        {loading && <TableLoading resultsPerPage={resultsPerPage} numberOfColumns={11} />}
+                        {loading && <TableLoading resultsPerPage={RESULT_PER_PAGE} numberOfColumns={11} />}
                         {!loading && !error && <ProjectedDecarbonationLoaded annual={annual} />}
                         {error && <ErrorReloadTable refetchData={refetchData} /> }
                     </tbody>
                 </table>
             </div>
             <div className="mt-8">
-                <Pagination pageCount={currentPage} handlePageClick={handlePageClick} />
+                <Pagination pageCount={pagination?.total_page} handlePageClick={handlePageClick} />
             </div>
         </div>
     );
 }
 
-function ProjectedDecarbonationLoaded({ annual }: { annual: Annual[] }) {
+function ProjectedDecarbonationLoaded({ annual }: { annual: AnnualData[] }) {
     if (annual.length === 0) {
         return <NoDataTable />
     }
 
     return (
         <>
-            {annual.map((data: Annual, idx: number) => {
+            {annual.map((data: AnnualData, idx: number) => {
                 const { time_period, emissions, ex_post_issued, ex_post_purchased, ex_post_retired, target, actual_rate, delta, debt, ex_post_stock, ex_ante_stock } = data;
 
                 if (!time_period) {

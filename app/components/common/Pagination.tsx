@@ -17,7 +17,6 @@ export default function Pagination({pageCount, handlePageClick}: {pageCount?: nu
             previousClassName="hidden"
             nextClassName="hidden"
             breakClassName="list-none mx-1"
-            
         />
     )
 }
