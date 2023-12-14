@@ -3,6 +3,7 @@ import ProjectDecarbonationTable from "./net-zero/ProjectDecarbonationTable";
 import GlobalData from "./net-zero/GlobalData";
 import ProjectDecarbonationTableCumulative from "./net-zero/ProjectDecarbonationTableCumulative";
 import FinancialAnalysisTable from "./net-zero/FinancialAnalysisTable";
+import OrdersAnnualTable from "./net-zero/OrdersAnnualTable";
 export default function NetZeroOverview() {
     return (
         <>
@@ -11,6 +12,7 @@ export default function NetZeroOverview() {
                 <ProjectDecarbonation isFullScreen={true} />
                 <ProjectDecarbonationTable />
                 <ProjectDecarbonationTableCumulative />
+                <OrdersAnnualTable />
                 <FinancialAnalysisTable />
             </div>
         </>
