@@ -47,7 +47,7 @@ export default function ProjectsList() {
                             href={`/portfolio/${project.slug}`}
                             className="overflow-hidden text-ellipsis"
                         >
-                            <img src={project.metadata?.image_url} alt={`${project.name} project`} />
+                            <img src={project.metadata?.sft_image_url} alt={`${project.name} project`} />
                         </a>
                     ))}
                 </div>
