@@ -96,7 +96,8 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
         }
       
         return null;
-    };
+    }
+
     return (
         <div className={`w-full px-0 mt-8 h-full`}>
             <Title title="Net Zero planning" />
@@ -117,7 +118,7 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                     }}
                 >
                     <CartesianGrid stroke="#2B2E36" />
-                    <XAxis dataKey="year" />
+                    <XAxis dataKey="vintage" />
                     <YAxis yAxisId="left" label={{ value: 'Kilo t', angle: -90, position: 'insideLeft' }}  />
                     <YAxis yAxisId="right" orientation="right" label={{ value: 'Target (%)', angle: 90, position: 'insideRight' }} domain={[0, 100]} />
                     <Tooltip content={<CustomTooltip />} />

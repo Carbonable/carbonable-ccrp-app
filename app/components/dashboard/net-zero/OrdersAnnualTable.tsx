@@ -67,7 +67,11 @@ export default function OrdersAnnualTable() {
                 </table>
             </div>
             <div className="mt-8">
-                <Pagination pageCount={pagination?.total_page} handlePageClick={handlePageClick} />
+                <Pagination 
+                    currentPage={currentPage}
+                    pageCount={pagination?.total_page} 
+                    handlePageClick={handlePageClick}
+                />
             </div>
         </div>
     );

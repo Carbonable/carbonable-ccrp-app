@@ -5,7 +5,7 @@ import { CREATE_BUSINESS_UNIT } from "~/graphql/queries/business-units";
 import { CARBONABLE_COMPANY_ID } from "~/utils/constant";
 
 export default function CreateButton({ setIsOpen, buName, buDescription, buMetadata, defaultForecastedEmission, defaultTarget, hasError, refetch }: 
-    { setIsOpen: (b: boolean) => void, buName: string, buDescription: string, buMetadata: string, defaultForecastedEmission: number, defaultTarget: number, hasError: boolean, refetch: () => void }) {
+    { setIsOpen: (b: boolean) => void, buName: string, buDescription: string, buMetadata: string, defaultForecastedEmission?: number, defaultTarget?: number, hasError: boolean, refetch: () => void }) {
     
         
     const [createMutation, { loading, error, data }] = useMutation(CREATE_BUSINESS_UNIT);
@@ -20,8 +20,8 @@ export default function CreateButton({ setIsOpen, buName, buDescription, buMetad
                         description: buDescription,
                         metadata: buMetadata,
                         company_id: CARBONABLE_COMPANY_ID,
-                        default_forecasted_emission: defaultForecastedEmission,
-                        default_target: defaultTarget
+                        default_forecasted_emission: defaultForecastedEmission ?  defaultForecastedEmission : 0,
+                        default_target: defaultTarget ? defaultTarget : 0
                     }
                 }
             });

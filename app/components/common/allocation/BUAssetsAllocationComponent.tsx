@@ -6,7 +6,7 @@ import SecondaryButton from "../Buttons";
 import type { BusinessUnitCarbonAssetAllocationData, PageInfo } from "~/graphql/__generated__/graphql";
 import { RESULT_PER_PAGE } from "~/utils/constant";
 
-export default function BUAssetsAllocationComponent({ data, loading, error, refetchData, setCurrentPage }: { data: any, loading: boolean, error: any, refetchData: any, setCurrentPage: (page: number) => void }) {
+export default function BUAssetsAllocationComponent({ data, loading, error, refetchData, currentPage, setCurrentPage }: { data: any, loading: boolean, error: any, refetchData: any, currentPage: number, setCurrentPage: (page: number) => void }) {
 
     if (error) {
         console.error(error);
@@ -42,7 +42,11 @@ export default function BUAssetsAllocationComponent({ data, loading, error, refe
                 </table>
             </div>
             <div className="mt-8">
-                <Pagination pageCount={pagination?.total_page} handlePageClick={handlePageClick} />
+                <Pagination 
+                    currentPage={currentPage}
+                    pageCount={pagination?.total_page} 
+                    handlePageClick={handlePageClick}
+                />
             </div>
         </div>
     );

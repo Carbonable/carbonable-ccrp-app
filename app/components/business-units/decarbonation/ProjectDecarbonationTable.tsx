@@ -36,6 +36,13 @@ export default function ProjectDecarbonationTable({ businessUnitId }: { business
 
 
     return (
-        <ProjectDecarbonationTableComponent loading={loading} error={error} data={data} refetchData={refetchData} setCurrentPage={setCurrentPage} />
+        <ProjectDecarbonationTableComponent 
+            loading={loading}
+            error={error}
+            data={data}
+            refetchData={refetchData}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage} 
+        />
     )
 }
