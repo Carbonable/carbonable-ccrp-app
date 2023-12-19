@@ -17,7 +17,8 @@ export default function AllocateButton({ businessUnitId, projectId, amount, setI
                         business_unit_id: businessUnitId,
                         amount: parseInt(amount.toString())
                     }
-                }
+                },
+                refetchQueries: "active"
             });
     
             // Handle the result as needed
