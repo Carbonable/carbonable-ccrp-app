@@ -1,6 +1,6 @@
 import ReactPaginate from "react-paginate";
 
-export default function Pagination({pageCount, handlePageClick}: {pageCount?: number, handlePageClick: any}) {
+export default function Pagination({ currentPage, pageCount, handlePageClick }: { pageCount?: number, handlePageClick: any , currentPage: number}) {
     if (!pageCount) return null;
     
     return (
@@ -17,6 +17,7 @@ export default function Pagination({pageCount, handlePageClick}: {pageCount?: nu
             previousClassName="hidden"
             nextClassName="hidden"
             breakClassName="list-none mx-1"
+            forcePage={currentPage - 1}
         />
     )
 }

@@ -37,6 +37,7 @@ export default function ProjectFundingAllocation() {
         error={error}
         data={data}
         refetchData={refetchData}
+        currentPage={currentPage}
         setCurrentPage={setCurrentPage}
     />
 }

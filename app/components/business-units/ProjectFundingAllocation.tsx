@@ -35,6 +35,7 @@ export default function ProjectFundingAllocation({ businessUnitId }: { businessU
         loading={loading}
         error={error}
         data={data}
+        currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         refetchData={refetchData}
     />

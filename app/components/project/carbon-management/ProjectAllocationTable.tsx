@@ -35,6 +35,7 @@ export default function ProjectAllocationTable({ projectId }: { projectId: strin
         loading={loading}
         error={error}
         data={data}
+        currentPage={currentPage}
         refetchData={refetchData}
         setCurrentPage={setCurrentPage}
     />

@@ -71,9 +71,14 @@ export default function Index() {
         <>
             <DefaultLayout>
                 <BackButton link="/?opentab=businessunit" />
-                <div className="flex justify-between items-center mt-12 pl-4">
-                    <div className="text-xl uppercase">
-                        {businessUnit.name}
+                <div className="flex justify-between items-start mt-12 pl-4">
+                    <div>
+                        <div className="text-xl uppercase">
+                            {businessUnit.name}
+                        </div>
+                        <div className="text-neutral-200 font-light">
+                            {businessUnit.description}
+                        </div>
                     </div>
                     <div className="text-right">
                         <SecondaryButton onClick={openAllocation}>Add allocation</SecondaryButton>
@@ -87,7 +92,6 @@ export default function Index() {
                     <ProjectFundingAllocation businessUnitId={id} />
                 </div>
                 <div className="mt-16">
-                    <Title title="Projected decarbonation" />
                     <DecarbonationOverview businessUnitId={id} />
                 </div>
                 <div className="mt-16">

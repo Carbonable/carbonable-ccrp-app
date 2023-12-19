@@ -5,7 +5,7 @@ import Title from "~/components/common/Title";
 import TableLoading from "~/components/table/TableLoading";
 import { RESULT_PER_PAGE } from "~/utils/constant";
 
-export default function ProjectDecarbonationTableComponent({ loading, error, data, refetchData, setCurrentPage }: { loading: boolean, error: any, data: any, refetchData: any, setCurrentPage: (page: number) => void }) {
+export default function ProjectDecarbonationTableComponent({ loading, error, data, refetchData, currentPage, setCurrentPage }: { loading: boolean, error: any, data: any, refetchData: any, currentPage: number, setCurrentPage: (page: number) => void }) {
 
     if (error) {
         console.error(error);
@@ -46,7 +46,11 @@ export default function ProjectDecarbonationTableComponent({ loading, error, dat
                 </table>
             </div>
             <div className="mt-8">
-                <Pagination pageCount={pagination?.total_page} handlePageClick={handlePageClick} />
+                <Pagination 
+                    currentPage={currentPage}
+                    pageCount={pagination?.total_page} 
+                    handlePageClick={handlePageClick}
+                />
             </div>
         </div>
     );

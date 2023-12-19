@@ -8,7 +8,7 @@ import SecondaryButton from "../Buttons";
 import type { CompanyCarbonAssetAllocationData, PageInfo } from "~/graphql/__generated__/graphql";
 import { RESULT_PER_PAGE } from "~/utils/constant";
 
-export default function CompanyAssetsAllocationComponent({ data, loading, error, refetchData, setCurrentPage }: { data: any, loading: boolean, error: any, refetchData: any, setCurrentPage: (page: number) => void }) {
+export default function CompanyAssetsAllocationComponent({ data, loading, error, refetchData, currentPage, setCurrentPage }: { data: any, loading: boolean, error: any, refetchData: any, currentPage: number, setCurrentPage: (page: number) => void }) {
     const [filteredCarbonAssetAllocation, setFilteredCarbonAssetAllocation] = useState<CompanyCarbonAssetAllocationData[]>([]);
 
     if (error) {
@@ -60,7 +60,11 @@ export default function CompanyAssetsAllocationComponent({ data, loading, error,
                 </table>
             </div>
             <div className="mt-8">
-                <Pagination pageCount={pagination?.total_page} handlePageClick={handlePageClick} />
+                <Pagination 
+                    currentPage={currentPage}
+                    pageCount={pagination?.total_page} 
+                    handlePageClick={handlePageClick}
+                />
             </div>
         </div>
     );
