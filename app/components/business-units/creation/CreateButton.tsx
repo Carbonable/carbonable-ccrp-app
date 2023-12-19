@@ -23,7 +23,8 @@ export default function CreateButton({ setIsOpen, buName, buDescription, buMetad
                         default_forecasted_emission: defaultForecastedEmission ?  defaultForecastedEmission : 0,
                         default_target: defaultTarget ? defaultTarget : 0
                     }
-                }
+                },
+                refetchQueries: "active"
             });
     
             refetch();
