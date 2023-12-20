@@ -5,7 +5,7 @@ import { ImpactTitle } from "../Title";
 import { LinkSecondary } from "../Buttons";
 import type { ApolloError } from "@apollo/client";
 
-export default function ImpactComponent({ loading, error, data, refetch }: { loading: boolean, error: ApolloError | undefined, data: any, refetch: any }) {
+export default function ImpactComponent({ loading, error, data, refetch, link }: { loading: boolean, error: ApolloError | undefined, data: any, refetch: any, link?: string }) {
     const cssBlock = "border border-neutral-500 rounded-xl px-6 py-4 bg-neutral-700"
     
     const refetchData = () => {
@@ -73,7 +73,7 @@ export default function ImpactComponent({ loading, error, data, refetch }: { loa
                 <div className="xl:p-8">
                     <div className="text-neutral-50 font-bold text-2xl">See your <br/>full impact report</div>
                     <div className="mt-8 lg:mt-12">
-                        <LinkSecondary href="#">Go to impact Report</LinkSecondary>
+                        <LinkSecondary href={link ? link : ""}>Go to impact Report</LinkSecondary>
                     </div>
                 </div>
                 
