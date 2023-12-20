@@ -23,7 +23,7 @@ export default function ProjectTabs({ mapboxKey, project, dmrv}: { mapboxKey: st
                     <Tabs.Content value="overview" className={contentClassName}><Overview project={project} /></Tabs.Content>
                     <Tabs.Content value="management" className={contentClassName}><CarbonManagement project={project} /></Tabs.Content>
                     <Tabs.Content value="tracking" className={contentClassName}><Tracking mapboxKey={mapboxKey} dmrv={dmrv} /></Tabs.Content>
-                    <Tabs.Content value="impact" className={contentClassName}><ProjectImpact projectId={project.id} /></Tabs.Content>
+                    <Tabs.Content value="impact" className={contentClassName}><ProjectImpact projectId={project.id} reportLink={project.metadata.impact_report_url} /></Tabs.Content>
                 </div>
             </Tabs.List>
         </Tabs.Root>

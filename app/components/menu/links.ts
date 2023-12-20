@@ -14,7 +14,7 @@ export const links = [
         icon: 'portfolio'
     },
     {
-        href: '/impact',
+        href: 'https://carbonable.sextan.app/public/global/custom/jqnk50pr511dah162',
         label: 'Impact',
         isOpen: true,
         outsideLink: true,
