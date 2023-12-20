@@ -26,12 +26,18 @@ export default function BusinessUnitAllocationDialog({setIsOpen, businessUnitId 
     const [hasError, setHasError] = useState(false);
 
     const handleAmountChange = (e: any) => {
+        if (e.target.value > 100) {
+            setAmount(100);
+            return;
+        }
+
+        if (e.target.value < 0) {
+            setAmount(0);
+            return;
+        }
+        
         setAmount(e.target.value);
         setHasError(false);
-    }
-
-    const handleSetMax = () => {
-        setAmount(availableUnits);
     }
 
     if (loading) {
@@ -73,13 +79,29 @@ export default function BusinessUnitAllocationDialog({setIsOpen, businessUnitId 
                     <div className="mt-8">
                         <ProjectsList selectedProject={selectedProject} setSelectedProject={setSelectedProject} />
                     </div>
-                    <div className="mt-8 flex items-center justify-between font-light">
-                        <div className="text-left text-neutral-200 uppercase">Select Amount</div>
-                        <div className="text-right text-neutral-200 uppercase">Available <span className="text-neutral-50 font-bold ml-1"><Available businessUnitId={businessUnitId} projectId={selectedProject?.id} setAvailableUnits={setAvailableUnits} /> Units</span></div>
+                    <div className="mt-8 font-light">
+                        <div className="text-left text-neutral-200 uppercase">Percentage to allocate</div>
                     </div>
                     <div className="mt-1 w-full relative">
-                        <input className={`bg-opacityLight-5 text-left outline-0 border border-opacityLight-10 px-3 py-3 rounded-xl w-full focus:border-neutral-300 ${hasError ? "border-red-500 focus:border-red-500" : ""}`} type="number" value={amount} name="amount" aria-label="Amount" onChange={handleAmountChange} />
-                        <div className="absolute right-4 top-3 text-neutral-300 cursor-pointer font-bold font-sm" onClick={handleSetMax}>MAX</div>
+                        <input className={`bg-opacityLight-5 text-left outline-0 border border-opacityLight-10 px-3 py-3 rounded-xl w-full focus:border-neutral-300 ${hasError ? "border-red-500 focus:border-red-500" : ""}`} type="number" value={amount} max={100} name="amount" aria-label="Amount" onChange={handleAmountChange} />
+                    </div>
+                    <div className="flex items-center mt-1 ml-1 uppercase text-left text-neutral-200 text-xs">
+                        <div className="">
+                            Available 
+                            <span className="text-neutral-50 font-bold ml-1">
+                                <Available
+                                    businessUnitId={businessUnitId}
+                                    projectId={selectedProject?.id}
+                                    setAvailableUnits={setAvailableUnits}
+                                /> Units
+                            </span>
+                        </div>
+                        <div className="ml-4">
+                            To allocate 
+                            <span className="text-neutral-50 font-bold ml-1">
+                                {amount * availableUnits / 100} Units
+                            </span>
+                        </div>
                     </div>
                     <div className="mt-8 px-8 py-6 bg-neutral-800 rounded-xl border border-opacityLight-10 text-left text-sm">
                         Carbon units will be allocated to this business unit on a fifo basis, based on target and other business units allocations.
