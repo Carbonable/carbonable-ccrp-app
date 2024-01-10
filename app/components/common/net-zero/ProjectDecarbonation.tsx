@@ -90,7 +90,8 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                 <div className="px-8 pt-4 pb-4 bg-neutral-700 font-inter rounded-lg text-xs font-extralight text-center text-neutral-100">
                     <p>{`Carbon emission: ${payload[0].value}kt`}</p>
                     <p>{`CO² contribution: ${parseInt(payload[1].value + payload[2].value)}kt`}</p>
-                    <p>{`Neutrality: ${payload[3].value}%`}</p>
+                    <p>{`Target: ${payload[3].value}%`}</p>
+                    <p>{`Actual: ${payload[4].value}kt`}</p>
                 </div>
             );
         }
@@ -134,7 +135,7 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                     </Bar>
                     <Bar dataKey="ex_ante_count" name={bar2Name} yAxisId="left" stackId="a" barSize={10} fill="#06A475" radius={[10, 10, 0, 0]} />
                     <Line type="monotone" name="target" yAxisId="right" dataKey="target" stroke="#D0D1D6" strokeWidth={2} dot={false} activeDot={false} />
-                    <Line type="monotone" name="actual" yAxisId="right" dataKey="actual" stroke="#877B44" strokeWidth={2} dot={false} activeDot={false} />
+                    <Line type="monotone" name="actual" yAxisId="left" dataKey="actual" stroke="#877B44" strokeWidth={2} dot={false} activeDot={false} />
                 </ComposedChart>
             </ResponsiveContainer>
             <div className="text-neutral-300 text-sm lg:text-lg font-inter text-center w-fit mx-auto md:mt-2 lg:mt-0">
