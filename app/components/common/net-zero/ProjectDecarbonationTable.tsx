@@ -26,16 +26,16 @@ export default function ProjectDecarbonationTableComponent({ loading, error, dat
                     <thead className="bg-neutral-500 text-neutral-100 whitespace-nowrap h-10">
                         <tr>
                             <th className="px-4 sticky left-0 z-10 bg-neutral-500">Time Period</th>
-                            <th className="px-4">Emission</th>
-                            <th className="px-4">Ex-Post Issued</th>
-                            <th className="px-4">Ex-Post Purchased</th>
-                            <th className="px-4">Ex-Post Retired</th>
-                            <th className="px-4">Neutrality Target</th>
-                            <th className="px-4">Actual Rate</th>
-                            <th className="px-4">Delta %</th>
-                            <th className="px-4">Debt</th>
-                            <th className="px-4">Ex-Post Stock</th>
-                            <th className="px-4">Ex-ante Stock</th>
+                            <th className="px-4">Emission (t)</th>
+                            <th className="px-4">Ex-Post Issued (t)</th>
+                            <th className="px-4">Ex-Post Purchased (t)</th>
+                            <th className="px-4">Ex-Post Retired (t)</th>
+                            <th className="px-4">Neutrality Target (%)</th>
+                            <th className="px-4">Actual Rate (%)</th>
+                            <th className="px-4">Delta (%)</th>
+                            <th className="px-4">Debt (t)</th>
+                            <th className="px-4">Ex-Post Stock (t)</th>
+                            <th className="px-4">Ex-ante Stock (t)</th>
                         </tr>
                     </thead>
                     <tbody>

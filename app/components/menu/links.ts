@@ -19,5 +19,13 @@ export const links = [
         isOpen: true,
         outsideLink: true,
         icon: 'impact'
+    },
+    {
+        href: '/calculator',
+        label: 'Calculator',
+        isOpen: true,
+        outsideLink: false,
+        icon: 'calculator'
     }
+
 ];

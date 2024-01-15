@@ -8,8 +8,8 @@ export default function Block({ block }: { block: BusinessUnit }) {
 
     return (
         <div className="border border-neutral-700 w-full p-4 xl:p-8 rounded-3xl cursor-pointer hover:brightness-[120%]">
-            <div className="flex justify-start items-end">
-                <span className="text-2xl" role="img" aria-label="block icon"></span>
+            <div className="flex justify-start items-center">
+                <img src="/assets/images/logo-only.png" alt="Carbonable logo" className="w-8" />
                 <div className="ml-2 text-neutral-50 text-xl">{block.name}</div>
             </div>
             <div className="mt-4 grid grid-cols-3 gap-x-4 lg:gap-x-8">

@@ -54,9 +54,9 @@ export default function OrdersAnnualTable() {
                         <tr>
                             <th className="px-4 sticky left-0 z-10 bg-neutral-500">Time Period</th>
                             <th className="px-4">Project</th>
-                            <th className="px-4">Qty allocated</th>
-                            <th className="px-4">Stock available</th>
-                            <th className="px-4">Qty Locked</th>
+                            <th className="px-4">Qty allocated (t)</th>
+                            <th className="px-4">Stock available (t)</th>
+                            <th className="px-4">Qty Locked (t)</th>
                         </tr>
                     </thead>
                     <tbody>
