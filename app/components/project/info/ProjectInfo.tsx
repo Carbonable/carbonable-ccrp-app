@@ -10,7 +10,7 @@ export default function ProjectInfo({ name, data }: { name: string | any, data: 
                         {name}
                     </div>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-6 mt-8">
-                        <KPI title="$ amount" kpi={`TBD`} />
+                        <KPI title="$ Amount" kpi={`TBD`} />
                         <KPI title="Source" kpi={`TBD`} />
                         <KPI title="Rating" kpi={`TBD`} />
                         <KPI title="Allocation units" kpi={`TBD`} />
@@ -29,7 +29,7 @@ export default function ProjectInfo({ name, data }: { name: string | any, data: 
                     {name}
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-x-2 gap-y-6 mt-8">
-                    <KPI title="$ amount" kpi={data.amount} />
+                    <KPI title="$ Amount" kpi={data.amount} />
                     <KPI title="Source" kpi={data.source} />
                     <KPI title="Rating" kpi={data.rating} />
                     <KPI title="Allocation units" kpi={data.allocated_units} />

@@ -53,12 +53,12 @@ export default function ProjectDecarbonationTableCumulative() {
                     <thead className="bg-neutral-500 text-neutral-100 whitespace-nowrap h-10">
                         <tr>
                             <th className="px-4 sticky left-0 z-10 bg-neutral-500">Time Period</th>
-                            <th className="px-4">Cumulative Emissions</th>
-                            <th className="px-4">Cumulative Retired</th>
-                            <th className="px-4">Cumulative Issued</th>
-                            <th className="px-4">Cumulative Purchased</th>
-                            <th className="px-4">Cumulative Delta</th>
-                            <th className="px-4">Cumulative Emission Debt</th>
+                            <th className="px-4">Cumulative Emissions (t)</th>
+                            <th className="px-4">Cumulative Retired (t)</th>
+                            <th className="px-4">Cumulative Issued (t)</th>
+                            <th className="px-4">Cumulative Purchased (t)</th>
+                            <th className="px-4">Cumulative Delta (%)</th>
+                            <th className="px-4">Cumulative Emission Debt (t)</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -26,11 +26,11 @@ export default function BUAssetsAllocationComponent({ data, loading, error, refe
                     <thead className="bg-neutral-500 text-neutral-100 whitespace-nowrap h-10">
                         <tr className="table-style">
                             <th className="px-4 sticky left-0 z-10 bg-neutral-500">Project Name</th>
-                            <th className="px-4">Total Carbon Unit</th>
-                            <th className="px-4">Allocated</th>
-                            <th className="px-4">Generated</th>
-                            <th className="px-4">Forward</th>
-                            <th className="px-4">Retired</th>
+                            <th className="px-4">Total Carbon Unit (t)</th>
+                            <th className="px-4">Allocated (t)</th>
+                            <th className="px-4">Generated (t)</th>
+                            <th className="px-4">Forward (t)</th>
+                            <th className="px-4">Retired (t)</th>
                             <th className="px-4"></th>
                         </tr>
                     </thead>

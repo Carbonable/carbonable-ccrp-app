@@ -26,10 +26,10 @@ export default function ProjectAssetsAllocationComponent({ data, loading, error,
                     <thead className="bg-neutral-500 text-neutral-100 whitespace-nowrap h-10">
                         <tr className="table-style">
                             <th className="px-4 sticky left-0 z-10 bg-neutral-500">Business Unit</th>
-                            <th className="px-4">Allocated</th>
-                            <th className="px-4">Allocation amount</th>
-                            <th className="px-4">Target</th>
-                            <th className="px-4">Actual</th>
+                            <th className="px-4">Allocated (t)</th>
+                            <th className="px-4">Allocation amount ($)</th>
+                            <th className="px-4">Target (%)</th>
+                            <th className="px-4">Actual (%)</th>
                             <th className="px-4">Start date</th>
                             <th className="px-4"></th>
                         </tr>

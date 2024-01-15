@@ -1,6 +1,6 @@
 import ErrorReload from "../../common/ErrorReload";
 import { type NetZeroPlanning } from "~/graphql/__generated__/graphql";
-import { Bar, CartesianGrid, Cell, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, Brush, CartesianGrid, Cell, ComposedChart, Legend, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useEffect, useState } from "react";
 import { CustomLegend } from "../../common/CustomGraphLegend";
 import Title from "~/components/common/Title";
@@ -124,8 +124,8 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                     <YAxis yAxisId="right" orientation="right" label={{ value: 'Target (%)', angle: 90, position: 'insideRight' }} domain={[0, 100]} />
                     <Tooltip content={<CustomTooltip />} />
                     {!isFullScreen && <Legend /> }
-                    <Bar dataKey="emission" name="Emission" yAxisId="left" barSize={10} fill="#334566" radius={[10, 10, 0, 0]} />
-                    <Bar dataKey="ex_post_count" name={bar1Name} yAxisId="left" stackId="a" barSize={10} fill="#046B4D">
+                    <Bar dataKey="emission" name="Emission" yAxisId="left" fill="#334566" radius={[10, 10, 0, 0]} />
+                    <Bar dataKey="ex_post_count" name={bar1Name} yAxisId="left" stackId="a" fill="#046B4D">
                         {netZeroPlanning.map((entry: any, index: number) => {
                             return (
                                 // @ts-ignore
@@ -136,6 +136,7 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                     <Bar dataKey="ex_ante_count" name={bar2Name} yAxisId="left" stackId="a" barSize={10} fill="#06A475" radius={[10, 10, 0, 0]} />
                     <Line type="monotone" name="target" yAxisId="right" dataKey="target" stroke="#D0D1D6" strokeWidth={2} dot={false} activeDot={false} />
                     <Line type="monotone" name="actual" yAxisId="left" dataKey="actual" stroke="#877B44" strokeWidth={2} dot={false} activeDot={false} />
+                    <Brush dataKey="vintage" height={30} stroke="#878A94" fill="#1F2128" />
                 </ComposedChart>
             </ResponsiveContainer>
             <div className="text-neutral-300 text-sm lg:text-lg font-inter text-center w-fit mx-auto md:mt-2 lg:mt-0">

@@ -39,16 +39,16 @@ export default function CompanyAssetsAllocationComponent({ data, loading, error,
                         <tr className="table-style">
                             <th className="px-4 sticky left-0 z-10 bg-neutral-500">Project Name</th>
                             <th className="px-4">Type</th>
-                            <th className="px-4">Total Potential</th>
-                            <th className="px-4">Ex-post to date</th>
-                            <th className="px-4">Ex-ante to date</th>
+                            <th className="px-4">Total Potential (t)</th>
+                            <th className="px-4">Ex-post to date (t)</th>
+                            <th className="px-4">Ex-ante to date (t)</th>
                             <th className="px-4">Project completion (%)</th>
                             <th className="px-4"></th>
-                            <th className="px-4">Total Allocated to date</th>
-                            <th className="px-4">Total Available to date</th>
-                            <th className="px-4">Allocation Rate</th>
-                            <th className="px-4">Price/t</th>
-                            <th className="px-4">Total $ amount</th>
+                            <th className="px-4">Total Allocated to date (t)</th>
+                            <th className="px-4">Total Available to date (t)</th>
+                            <th className="px-4">Allocation Rate (%)</th>
+                            <th className="px-4">Price/t ($)</th>
+                            <th className="px-4">Total amount (%)</th>
                             <th className="px-4"></th>
                         </tr>
                     </thead>

@@ -27,7 +27,7 @@ export function GlobalKPI({title, kpi, loading, error, refetchData}: {title: str
 }
 
 export function KPI({title, kpi, loading, error, refetchData}: {title: string, kpi: any, loading?: boolean, error?: any, refetchData?: any}) {
-    const cssClass = "relative w-full border border-opacityLight-10 py-1 px-2 md:py-2 md:px-4 rounded-lg uppercase";
+    const cssClass = "relative w-full border border-opacityLight-10 py-1 px-2 md:py-2 md:px-4 rounded-lg";
     if (loading) return (
         <div className={cssClass}>
             <div className="text-neutral-200 text-sm font-light">{title}</div>
@@ -47,8 +47,8 @@ export function KPI({title, kpi, loading, error, refetchData}: {title: string, k
     return (
         <div className={cssClass}>
             <div className="text-neutral-200 text-sm font-light">{title}</div>
-            <div className="text-neutral-100 text-xl mt-2">
-                {kpi}
+            <div className="text-neutral-100 text-xl mt-2 capitalize">
+                {kpi.toString().toLowerCase()}
             </div>
         </div>
     )

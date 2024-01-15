@@ -1,6 +1,6 @@
 import ErrorReload from "../../common/ErrorReload";
 import { type NetZeroPlanning } from "~/graphql/__generated__/graphql";
-import { Bar, CartesianGrid, Cell, ComposedChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Bar, Brush, CartesianGrid, Cell, ComposedChart, Legend, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { useEffect, useState } from "react";
 import { CustomLegend } from "../../common/CustomGraphLegend";
 import Title from "~/components/common/Title";
@@ -98,7 +98,7 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                     <YAxis yAxisId="left" label={{ value: 'Kilo t', angle: -90, position: 'insideLeft' }}  />
                     <Tooltip content={<CustomTooltip />} />
                     {!isFullScreen && <Legend /> }
-                    <Bar dataKey="ex_post_count" name={bar1Name} yAxisId="left" stackId="a" barSize={10} fill="#046B4D">
+                    <Bar dataKey="ex_post_count" name={bar1Name} yAxisId="left" stackId="a" fill="#046B4D">
                         {netZeroPlanning.map((entry: any, index: number) => {
                             return (
                                 // @ts-ignore
@@ -106,7 +106,8 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                             );
                         })}
                     </Bar>
-                    <Bar dataKey="ex_ante_count" name={bar2Name} yAxisId="left" stackId="a" barSize={10} fill="#06A475" radius={[10, 10, 0, 0]} />
+                    <Bar dataKey="ex_ante_count" name={bar2Name} yAxisId="left" stackId="a" fill="#06A475" radius={[10, 10, 0, 0]} />
+                    <Brush dataKey="vintage" height={30} stroke="#878A94" fill="#1F2128" />
                 </ComposedChart>
             </ResponsiveContainer>
             <div className="text-neutral-300 text-sm lg:text-lg font-inter text-center w-fit mx-auto md:mt-2 lg:mt-0">
