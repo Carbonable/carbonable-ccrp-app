@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_GLOBAL_DATA = gql`
-query GetGlobalData {
-    getGlobalData {
+query GetGlobalData($view: VisualizationViewType) {
+    getGlobalData(view: $view) {
         target
         actual
         debt

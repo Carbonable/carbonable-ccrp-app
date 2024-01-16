@@ -5,6 +5,7 @@ import GlobalDataComponent from "../common/global-data/GlobalData";
 
 
 export default function GlobalData({businessUnitId}: { businessUnitId: string}) {
+    console.log(businessUnitId)
     const { loading, error, data, refetch } = useQuery(GET_GLOBAL_DATA, {
         variables: {
             view: {

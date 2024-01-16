@@ -1,11 +1,10 @@
-import { shortenNumber } from "~/utils/utils";
 import Repartition from "./block/Repartition";
 import CircleProgress from "./block/CircleProgress";
 import AllocationKPI from "./block/AllocationKPI";
 import type { BusinessUnit } from "~/graphql/__generated__/graphql";
 
 export default function Block({ block }: { block: BusinessUnit }) {
-
+    console.log(block)
     return (
         <div className="border border-neutral-700 w-full p-4 xl:p-8 rounded-3xl cursor-pointer hover:brightness-[120%]">
             <div className="flex justify-start items-center">
@@ -13,8 +12,8 @@ export default function Block({ block }: { block: BusinessUnit }) {
                 <div className="ml-2 text-neutral-50 text-xl">{block.name}</div>
             </div>
             <div className="mt-4 grid grid-cols-3 gap-x-4 lg:gap-x-8">
-                <AllocationKPI title="Yearly Emission" value={`${shortenNumber(block.default_emission)} t`} />
-                <AllocationKPI title="yearly contribution" value={`$${shortenNumber(block.default_target)}`} />
+                <AllocationKPI title="Yearly Emission" value={block.yearly_emissions?.toString()} />
+                <AllocationKPI title="yearly contribution" value={block.yearly_contributions?.toString()} />
                 <div className="w-full">
                     <CircleProgress value={block.default_target} over={block.default_emission} size={52} bgColor="#29A46F" progressColor="#363840" />
                 </div>
