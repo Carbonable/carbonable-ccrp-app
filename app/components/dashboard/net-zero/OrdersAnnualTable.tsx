@@ -56,7 +56,6 @@ export default function OrdersAnnualTable() {
                             <th className="px-4">Project</th>
                             <th className="px-4">Qty allocated (t)</th>
                             <th className="px-4">Stock available (t)</th>
-                            <th className="px-4">Qty Locked (t)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,8 +88,7 @@ function TableLoaded({stocks}: {stocks: StockData[]}) {
                     vintage,
                     project,
                     quantity,
-                    available,
-                    locked
+                    available
                 } = data;
 
                 if (!vintage) {
@@ -103,7 +101,6 @@ function TableLoaded({stocks}: {stocks: StockData[]}) {
                         <td className="px-4">{project.name}</td>
                         <td className="px-4">{quantity}</td>
                         <td className="px-4">{available}</td>
-                        <td className="px-4">{locked}</td>
                     </tr>
                 )
             })}

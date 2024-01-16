@@ -18,6 +18,10 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
         {
             name: 'Ex Ante',
             color: "#06A475",
+        },
+        {
+            name: "Retired",
+            color: "#0E3725",
         }
     ]);   
 
@@ -38,6 +42,10 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
             {
                 name: bar2Name,
                 color: "#06A475",
+            },
+            {
+                name: "Retired",
+                color: "#0E3725",
             }
         ]);
     }, [bar1Name, bar2Name]);
@@ -67,6 +75,7 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                     <p>{`Year: ${label}`}</p>
                     <p>{`Ex-ante: ${payload[1].value} kt`}</p>
                     <p>{`Ex-post: ${payload[0].value} kt`}</p>
+                    <p>{`Retired: ${parseInt(payload[2].value)}kt`}</p>
                 </div>
             );
         }
@@ -95,7 +104,7 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                 >
                     <CartesianGrid stroke="#2B2E36" />
                     <XAxis dataKey="vintage" />
-                    <YAxis yAxisId="left" label={{ value: 'Kilo t', angle: -90, position: 'insideLeft' }}  />
+                    <YAxis yAxisId="left" label={{ value: 'Tons', angle: -90, position: 'insideLeft' }}  />
                     <Tooltip content={<CustomTooltip />} />
                     {!isFullScreen && <Legend /> }
                     <Bar dataKey="ex_post_count" name={bar1Name} yAxisId="left" stackId="a" fill="#046B4D">
@@ -107,10 +116,11 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
                         })}
                     </Bar>
                     <Bar dataKey="ex_ante_count" name={bar2Name} yAxisId="left" stackId="a" fill="#06A475" radius={[10, 10, 0, 0]} />
+                    <Bar dataKey="retired" name="Retired" yAxisId="left" fill="#0E3725" radius={[10, 10, 0, 0]} />
                     <Brush dataKey="vintage" height={30} stroke="#878A94" fill="#1F2128" />
                 </ComposedChart>
             </ResponsiveContainer>
-            <div className="text-neutral-300 text-sm lg:text-lg font-inter text-center w-fit mx-auto md:mt-2 lg:mt-0">
+            <div className="text-neutral-300 text-sm lg:text-lg font-inter text-center w-fit mx-auto md:mt-2">
                 <CustomLegend payload={legendPayload} />
             </div>
         </div>

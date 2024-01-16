@@ -21,6 +21,7 @@ export const NET_ZERO_PLANNING = gql`
         emission
         target
         actual
+        retired
     }
   }
 `;

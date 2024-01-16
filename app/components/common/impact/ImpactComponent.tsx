@@ -69,7 +69,7 @@ export default function ImpactComponent({ loading, error, data, refetch, link }:
                 </div>
             </div>
             <div className={`col-span-4 md:row-span-2 md:col-span-3 ${cssBlock} bg-impact-report relative overflow-hidden`}>
-                <img className="absolute bottom-[-55%] right-[-2%] w-[90%] h-full object-contain object-top rounded-2xl -rotate-6 md:object-cover md:bottom-[-50%] md:w-[54%] lg:bottom-[-33%] lg:w-[60%]" src="/assets/images/impact/bel.png" alt="impact-report" />
+                <img className="absolute bottom-[-55%] right-[-2%] w-[90%] h-full object-contain object-top rounded-2xl -rotate-6 md:object-cover md:bottom-[-50%] md:w-[54%] lg:bottom-[-33%] lg:w-[60%]" src="/assets/images/impact/impact.png" alt="impact-report" />
                 <div className="xl:p-8">
                     <div className="text-neutral-50 font-bold text-2xl">See your <br/>full impact report</div>
                     <div className="mt-8 lg:mt-12">
