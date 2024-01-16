@@ -15,7 +15,7 @@ export default function Block({ block }: { block: BusinessUnit }) {
                 <AllocationKPI title="Yearly Emission" value={block.yearly_emissions?.toString()} />
                 <AllocationKPI title="yearly contribution" value={block.yearly_contributions?.toString()} />
                 <div className="w-full">
-                    <CircleProgress value={block.default_target} over={block.default_emission} size={52} bgColor="#29A46F" progressColor="#363840" />
+                    <CircleProgress rate={block.actual_rate} size={52} bgColor="#29A46F" progressColor="#363840" />
                 </div>
             </div>
             <div className="mt-8 w-full bg-neutral-600 rounded-full h-4 p-[4px] flex items-center justify-start">
