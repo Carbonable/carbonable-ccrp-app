@@ -8,6 +8,7 @@ export const BUSINESS_UNITS = gql`
 			description
 			default_emission
 			default_target
+			actual_rate
 			metadata {
 				key
 				value
