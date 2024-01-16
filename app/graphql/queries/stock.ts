@@ -15,7 +15,6 @@ query GetStock($view: VisualizationViewType!, $pagination: Pagination) {
         vintage
         quantity
         available
-        locked
       }
       page_info {
         has_next_page

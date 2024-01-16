@@ -14,6 +14,10 @@ export const BUSINESS_UNITS = gql`
 			}
 			yearly_emissions
 			yearly_contributions
+			allocations {
+				project
+				amount
+			}
     }
   }
 `;
