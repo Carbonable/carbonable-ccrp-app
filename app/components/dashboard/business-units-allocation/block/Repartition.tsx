@@ -27,7 +27,7 @@ function AllocationPercentage({allocation, idx, totalConsumption, length}: {allo
     }
 
     const percentage = Math.round((allocation.amount / totalConsumption) * 100);
-    const colors = ["#29A46F", "#F9C74F", "#F8961E", "#F3722C", "#F94144"];
+    const colors = ["#29A46F", "#F9C74F", "#F8961E", "#F3722C", "#F94144", "#277DA1", "#9C6644", "#553C9A", "#2A9D8F", "#E9C46A", "#E76F51", "#264653"];
 
     return (
         <div 

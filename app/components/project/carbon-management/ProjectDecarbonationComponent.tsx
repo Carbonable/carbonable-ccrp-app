@@ -73,9 +73,9 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
             return (
                 <div className="px-8 pt-4 pb-4 bg-neutral-700 font-inter rounded-lg text-xs font-extralight text-left text-neutral-100">
                     <p>{`Year: ${label}`}</p>
-                    <p>{`Ex-ante: ${payload[1].value} kt`}</p>
-                    <p>{`Ex-post: ${payload[0].value} kt`}</p>
-                    <p>{`Retired: ${parseInt(payload[2].value)}kt`}</p>
+                    <p>{`Ex-ante: ${payload[1].value} t`}</p>
+                    <p>{`Ex-post: ${payload[0].value} t`}</p>
+                    <p>{`Retired: ${parseInt(payload[2].value)}t`}</p>
                 </div>
             );
         }

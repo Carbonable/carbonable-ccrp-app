@@ -20,7 +20,7 @@ export default function ProjectAssetsAllocationComponent({ data, loading, error,
     }
 
     return (
-        <div className="w-full">
+        <div className="w-full mt-8">
             <div className="mt-4 w-full font-inter text-sm overflow-x-scroll border border-neutral-600">
                 <table className="table-auto text-left min-w-full">
                     <thead className="bg-neutral-500 text-neutral-100 whitespace-nowrap h-10">
