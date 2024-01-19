@@ -30,6 +30,8 @@ export default function ProjectDecarbonationTableComponent({ loading, error, dat
                             <th className="px-4">Ex-Post Issued (t)</th>
                             <th className="px-4">Ex-Post Purchased (t)</th>
                             <th className="px-4">Ex-Post Retired (t)</th>
+                            <th className="px-4">Total Ex-Post (t)</th>
+                            <th className="px-4">Total Ex-Ante (t)</th>
                             <th className="px-4">Neutrality Target (%)</th>
                             <th className="px-4">Actual Rate (%)</th>
                             <th className="px-4">Delta (%)</th>
@@ -64,7 +66,20 @@ function ProjectedDecarbonationLoaded({ annual }: { annual: AnnualData[] }) {
     return (
         <>
             {annual.map((data: AnnualData, idx: number) => {
-                const { time_period, emissions, ex_post_issued, ex_post_purchased, ex_post_retired, target, actual_rate, delta, debt, ex_post_stock, ex_ante_stock } = data;
+                const { 
+                    time_period,
+                    emissions,
+                    ex_post_issued,
+                    ex_post_purchased,
+                    ex_post_retired,
+                    target,
+                    actual_rate,
+                    delta, debt,
+                    ex_post_stock,
+                    ex_ante_stock,
+                    total_ex_ante,
+                    total_ex_post
+                } = data;
 
                 if (!time_period) {
                     return null;
@@ -77,6 +92,8 @@ function ProjectedDecarbonationLoaded({ annual }: { annual: AnnualData[] }) {
                         <td className="px-4">{ex_post_issued}</td>
                         <td className="px-4">{ex_post_purchased}</td>
                         <td className="px-4">{ex_post_retired}</td>
+                        <td className="px-4">{total_ex_post}</td>
+                        <td className="px-4">{total_ex_ante}</td>
                         <td className="px-4">{target}</td>
                         <td className="px-4">{actual_rate ? actual_rate : 'n/a'}</td>
                         <td className="px-4">{delta ? delta : 'n/a'}</td>
