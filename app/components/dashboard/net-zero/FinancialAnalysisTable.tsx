@@ -95,15 +95,18 @@ function TableLoaded({financialAnalysis}: {financialAnalysis: FinancialAnalysisD
             {financialAnalysis.map((data: FinancialAnalysisData, idx: number) => {
                 const { 
                     year,
-                    purchased_price,
-                    cumulative_purchased_price,
-                    total_purchased_amount,
-                    issued_price, 
+                    all_time_avg_issued_price,
+                    all_time_avg_purchased_price,
+                    all_time_avg_price,
+                    avg_issued_price,
+                    avg_purchased_price,
+                    avg_price,
+                    cumulative_emission_debt,
+                    cumulative_total_amount,
+                    emission_debt,
+                    total_amount,
                     total_issued_amount,
-                    gran_total_amount,
-                    cumulative_gran_total_amount,
-                    estimated_debt_amount,
-                    cumulative_estimated_debt_amount
+                    total_purchased_amount
                 } = data;
 
                 if (!year) {
@@ -113,18 +116,18 @@ function TableLoaded({financialAnalysis}: {financialAnalysis: FinancialAnalysisD
                 return (
                     <tr key={`projection_${idx}`} className={`border-b border-neutral-600 bg-neutral-800 h-12 last:border-b-0 hover:brightness-110 ${parseInt(year) < new Date().getFullYear() ? "text-neutral-50" : "text-neutral-200"}`}>
                         <td className="px-4 sticky left-0 z-10 bg-neutral-800">{year}</td>
-                        <td className="px-4">{purchased_price}</td>
-                        <td className="px-4">{issued_price}</td>
-                        <td className="px-4">Average price ($/t)</td>
+                        <td className="px-4">{avg_purchased_price}</td>
+                        <td className="px-4">{avg_issued_price}</td>
+                        <td className="px-4">{avg_price}</td>
                         <td className="px-4">{total_purchased_amount}</td>
                         <td className="px-4">{total_issued_amount}</td>
-                        <td className="px-4">{gran_total_amount}</td>
-                        <td className="px-4">{cumulative_purchased_price}</td>
-                        <td className="px-4">Cumulative Issued price ($/t)</td>
-                        <td className="px-4">Cumulative price ($/t)</td>
-                        <td className="px-4">{cumulative_gran_total_amount}</td>
-                        <td className="px-4">{estimated_debt_amount}</td>
-                        <td className="px-4">{cumulative_estimated_debt_amount}</td>
+                        <td className="px-4">{total_amount}</td>
+                        <td className="px-4">{all_time_avg_purchased_price}</td>
+                        <td className="px-4">{all_time_avg_issued_price}</td>
+                        <td className="px-4">{all_time_avg_price}</td>
+                        <td className="px-4">{cumulative_total_amount}</td>
+                        <td className="px-4">{emission_debt}</td>
+                        <td className="px-4">{cumulative_emission_debt}</td>
                     </tr>
                 )
             })}
