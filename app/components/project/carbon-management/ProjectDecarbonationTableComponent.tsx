@@ -28,6 +28,8 @@ export default function ProjectDecarbonationTableComponent({ loading, error, dat
                             <th className="px-4 sticky left-0 z-10 bg-neutral-500">Time Period</th>
                             <th className="px-4">Ex-Post Issued (t)</th>
                             <th className="px-4">Ex-Post Purchased (t)</th>
+                            <th className="px-4">Total Ex-Post (t)</th>
+                            <th className="px-4">Total Ex-Ante (t)</th>
                             <th className="px-4">Ex-Post Retired (t)</th>
                             <th className="px-4">Ex-Post Stock (t)</th>
                             <th className="px-4">Ex-ante Stock (t)</th>
@@ -65,7 +67,9 @@ function ProjectedDecarbonationLoaded({ annual }: { annual: AnnualData[] }) {
                     ex_post_purchased,
                     ex_post_retired,
                     ex_post_stock,
-                    ex_ante_stock 
+                    ex_ante_stock,
+                    total_ex_ante,
+                    total_ex_post,
                 } = data;
 
                 if (!time_period) {
@@ -77,6 +81,8 @@ function ProjectedDecarbonationLoaded({ annual }: { annual: AnnualData[] }) {
                         <td className="px-4 sticky left-0 z-10 bg-neutral-800">{time_period}</td>
                         <td className="px-4">{ex_post_issued}</td>
                         <td className="px-4">{ex_post_purchased}</td>
+                        <td className="px-4">{total_ex_post}</td>
+                        <td className="px-4">{total_ex_ante}</td>
                         <td className="px-4">{ex_post_retired}</td>
                         <td className="px-4">{ex_post_stock}</td>
                         <td className="px-4">{ex_ante_stock}</td>
