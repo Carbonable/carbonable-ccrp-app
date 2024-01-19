@@ -32,7 +32,7 @@ export default function BUList({selectedBU, setSelectedBU}: { selectedBU: Busine
 
     return (
         <>
-            <div className="text-left text-neutral-200 uppercase mb-2 font-light">Select Project</div>
+            <div className="text-left text-neutral-200 uppercase mb-2 font-light">Select business unit</div>
             <Listbox value={selectedBU} onChange={setSelectedBU}>
             <Listbox.Button className="relative w-full cursor-pointer rounded-lg bg-opacityLight-5 py-3 pl-3 pr-10 text-left shadow-md focus:outline-none sm:text-sm">
                 <span className="block truncate">{selectedBU.name}</span>

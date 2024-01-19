@@ -96,9 +96,9 @@ export default function ProjectDecarbonationComponent({ isFullScreen, loading, e
         if (active && payload && payload.length) {
             return (
                 <div className="px-8 pt-4 pb-4 bg-neutral-700 font-inter rounded-lg text-xs font-extralight text-center text-neutral-100">
-                    <p>{`Carbon emission: ${payload[0].value}kt`}</p>
-                    <p>{`CO² contribution: ${parseInt(payload[1].value + payload[3].value)}kt`}</p>
-                    <p>{`Retired: ${parseInt(payload[2].value)}kt`}</p>
+                    <p>{`Carbon emission: ${payload[0].value}t`}</p>
+                    <p>{`CO² contribution: ${parseInt(payload[1].value + payload[3].value)}t`}</p>
+                    <p>{`Retired: ${parseInt(payload[2].value)}t`}</p>
                     <p>{`Target: ${payload[4].value}%`}</p>
                     <p>{`Actual: ${payload[5].value}%`}</p>
                 </div>

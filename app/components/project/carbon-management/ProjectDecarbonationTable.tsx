@@ -1,8 +1,8 @@
 import { useQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import ProjectDecarbonationTableComponent from "~/components/common/net-zero/ProjectDecarbonationTable";
 import { ANNUAL } from "~/graphql/queries/net-zero";
 import { RESULT_PER_PAGE } from "~/utils/constant";
+import ProjectDecarbonationTableComponent from "./ProjectDecarbonationTableComponent";
 
 export default function ProjectDecarbonationTable({ projectId }: { projectId: string }) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -35,7 +35,7 @@ export default function ProjectDecarbonationTable({ projectId }: { projectId: st
     }, [currentPage]);
 
     return (
-        <ProjectDecarbonationTableComponent 
+        <ProjectDecarbonationTableComponent
             loading={loading}
             error={error}
             data={data}
