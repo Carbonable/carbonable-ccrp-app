@@ -96,7 +96,7 @@ function ProjectedDecarbonationLoaded({ annual }: { annual: AnnualData[] }) {
                         <td className="px-4">{total_ex_ante}</td>
                         <td className="px-4">{target}</td>
                         <td className="px-4">{actual_rate ? actual_rate : 'n/a'}</td>
-                        <td className="px-4">{delta ? delta : 'n/a'}</td>
+                        <td className="px-4">{delta ? delta : 0}</td>
                         <td className="px-4">{debt ? debt : 'n/a'}</td>
                         <td className="px-4">{ex_post_stock}</td>
                         <td className="px-4">{ex_ante_stock}</td>
