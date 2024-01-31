@@ -41,6 +41,8 @@ export const ANNUAL = gql`
         debt
         ex_post_stock
         ex_ante_stock
+        total_ex_post
+        total_ex_ante
       }
       page_info {
         has_next_page
@@ -81,17 +83,18 @@ export const FINANCIAL_ANALYSIS = gql`
     financialAnalysis(view: $view, pagination: $pagination) {
       data {
         year
-        purchased_price
-        cumulative_purchased_price
+        all_time_avg_issued_price,
+        all_time_avg_purchased_price,
+        all_time_avg_price,
+        avg_issued_price,
+        avg_purchased_price,
+        avg_price,
+        cumulative_emission_debt,
+        cumulative_total_amount,
+        emission_debt,
+        total_amount,
+        total_issued_amount,
         total_purchased_amount
-        cumulative_total_purchased_amount
-        issued_price
-        total_issued_amount
-        cumulative_total_issued_amount
-        gran_total_amount
-        cumulative_gran_total_amount
-        estimated_debt_amount
-        cumulative_estimated_debt_amount
       }
       page_info {
         has_next_page

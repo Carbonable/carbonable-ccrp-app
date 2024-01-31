@@ -4,7 +4,6 @@ import AllocationKPI from "./block/AllocationKPI";
 import type { BusinessUnit } from "~/graphql/__generated__/graphql";
 
 export default function Block({ block }: { block: BusinessUnit }) {
-    console.log(block)
     return (
         <div className="border border-neutral-700 w-full p-4 xl:p-8 rounded-3xl cursor-pointer hover:brightness-[120%]">
             <div className="flex justify-start items-center">
