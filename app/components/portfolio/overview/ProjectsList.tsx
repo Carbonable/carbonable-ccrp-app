@@ -40,7 +40,7 @@ export default function ProjectsList() {
                 </div>
             </div>
             <div className="mt-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-x-8 gap-y-2 mt-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 mt-4">
                     {projects.map((project: Project, idx: number) => (
                         <a 
                             key={`project_${project.id}_${idx}`}

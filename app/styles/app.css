@@ -2281,6 +2281,10 @@ video {
     padding-left: 222px;
   }
 
+  .lg\:pl-\[240px\] {
+    padding-left: 240px;
+  }
+
   .lg\:text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
