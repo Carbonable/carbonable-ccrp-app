@@ -1,7 +1,7 @@
 import IframeLayout from "~/layouts/IframeLayout";
 
 export default function Index() {
-    const iframeUrl = "https://prod-carbonable-calculator.fly.dev/calculator";
+    const iframeUrl = "https://kalculator.fly.dev";
 
     return (
         <IframeLayout>
